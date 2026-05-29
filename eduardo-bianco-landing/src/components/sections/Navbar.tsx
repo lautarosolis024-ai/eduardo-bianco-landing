@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { m, AnimatePresence } from "framer-motion";
-import { Globe, Menu, X } from "lucide-react";
+import { Globe, Menu, X, ChevronDown } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/config";
+import { servicesData } from "@/lib/services-data";
 
 const navLinks = [
   { href: "#about", label: "Nosotros" },
@@ -16,11 +17,30 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const servicesRef = useRef<HTMLDivElement>(null);
 
-  const closeMenu = useCallback(() => setMenuOpen(false), []);
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    setServicesOpen(false);
+  }, []);
+
+  // Close services dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        servicesRef.current &&
+        !servicesRef.current.contains(e.target as Node)
+      ) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
@@ -70,7 +90,6 @@ export default function Navbar() {
     };
 
     document.addEventListener("keydown", handleTab);
-    // Focus the first menu item when opened
     firstEl?.focus();
 
     return () => document.removeEventListener("keydown", handleTab);
@@ -109,19 +128,65 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors py-2 ${
-                activeSection === link.href.slice(1)
-                  ? "text-white"
-                  : "text-white/80 hover:text-white"
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href === "#services" ? (
+              <div key="services-dropdown" ref={servicesRef} className="relative">
+                <button
+                  onClick={() => setServicesOpen(!servicesOpen)}
+                  onMouseEnter={() => setServicesOpen(true)}
+                  className={`flex items-center gap-1 text-sm font-medium transition-colors py-2 ${
+                    activeSection === "services"
+                      ? "text-white"
+                      : "text-white/80 hover:text-white"
+                  }`}
+                  aria-expanded={servicesOpen}
+                  aria-haspopup="true"
+                >
+                  Servicios
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      servicesOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {servicesOpen && (
+                    <m.div
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -5 }}
+                      transition={{ duration: 0.15 }}
+                      onMouseLeave={() => setServicesOpen(false)}
+                      className="absolute top-full left-0 mt-2 liquid-glass rounded-xl p-2 min-w-[240px]"
+                    >
+                      {servicesData.map((service) => (
+                        <Link
+                          key={service.slug}
+                          href={`/servicios/${service.slug}`}
+                          onClick={() => setServicesOpen(false)}
+                          className="block px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg text-sm transition-colors"
+                        >
+                          {service.breadcrumbName}
+                        </Link>
+                      ))}
+                    </m.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-medium transition-colors py-2 ${
+                  activeSection === link.href.slice(1)
+                    ? "text-white"
+                    : "text-white/80 hover:text-white"
+                }`}
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
@@ -164,7 +229,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden liquid-glass rounded-2xl max-w-5xl mx-auto mt-2 p-4 flex flex-col gap-3"
+            className="lg:hidden liquid-glass rounded-2xl max-w-5xl mx-auto mt-2 p-4 flex flex-col gap-1"
           >
             {navLinks.map((link) => (
               <a
@@ -180,6 +245,24 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+
+            {/* Services sub-menu in mobile */}
+            <div className="pl-4 border-l border-white/10 ml-2">
+              <p className="text-white/50 text-xs uppercase tracking-wider py-2 px-2">
+                Servicios
+              </p>
+              {servicesData.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/servicios/${service.slug}`}
+                  onClick={closeMenu}
+                  className="block text-white/70 hover:text-white text-sm font-medium transition-colors py-2 px-2"
+                >
+                  {service.breadcrumbName}
+                </Link>
+              ))}
+            </div>
+
             <a
               href={getWhatsAppUrl()}
               target="_blank"

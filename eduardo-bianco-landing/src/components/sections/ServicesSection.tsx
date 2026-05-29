@@ -1,12 +1,14 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { m, useInView } from "framer-motion";
 import { MessageCircle, ArrowUpRight } from "lucide-react";
 import { getWhatsAppUrl, VIDEO_URLS } from "@/lib/config";
+import { servicesData } from "@/lib/services-data";
 import LazyVideo from "./LazyVideo";
 
-const services = [
+const featuredServices = [
   {
     videoUrl: VIDEO_URLS.serviceMediacion,
     tag: "Mediación",
@@ -14,6 +16,7 @@ const services = [
     description:
       "Facilitamos conversaciones constructivas entre partes en conflicto para alcanzar acuerdos justos y duraderos sin necesidad de litigios costosos. Nuestra mediación protege las relaciones mientras resuelve el fondo del conflicto.",
     ctaLabel: "Consultar mediación",
+    slug: "mediacion-patrimonial",
   },
   {
     videoUrl: VIDEO_URLS.servicePeritaje,
@@ -22,6 +25,7 @@ const services = [
     description:
       "Realizamos peritajes económicos y contables de alta complejidad para esclarecer el valor real de bienes, empresas y patrimonios compartidos. Cada informe es una herramienta estratégica para la negociación.",
     ctaLabel: "Consultar peritaje",
+    slug: "peritaje-economico",
   },
 ];
 
@@ -53,9 +57,9 @@ export default function ServicesSection() {
           </span>
         </m.div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {services.map((service, i) => (
+        {/* Featured cards grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
+          {featuredServices.map((service, i) => (
             <m.div
               key={service.tag}
               initial={{ opacity: 0, y: 50 }}
@@ -87,21 +91,49 @@ export default function ServicesSection() {
                   {service.description}
                 </p>
 
-                {/* Actionable CTA button — links to WhatsApp */}
-                <a
-                  href={getWhatsAppUrl(`Hola Eduardo, necesito una consulta sobre ${service.tag.toLowerCase()}.`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-full px-5 py-2.5 transition-colors min-h-[44px]"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  {service.ctaLabel}
-                  <ArrowUpRight className="w-3 h-3" />
-                </a>
+                {/* Actionable CTAs — WhatsApp + Service page link */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <a
+                    href={getWhatsAppUrl(`Hola Eduardo, necesito una consulta sobre ${service.tag.toLowerCase()}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-full px-5 py-2.5 transition-colors min-h-[44px]"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    {service.ctaLabel}
+                  </a>
+                  <Link
+                    href={`/servicios/${service.slug}`}
+                    className="inline-flex items-center gap-1 text-[#D4875A] hover:text-[#c77a4f] text-sm font-medium transition-colors min-h-[44px] px-2"
+                  >
+                    Ver más
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
               </div>
             </m.div>
           ))}
         </div>
+
+        {/* All services links */}
+        <m.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3"
+        >
+          {servicesData.map((service) => (
+            <Link
+              key={service.slug}
+              href={`/servicios/${service.slug}`}
+              className="liquid-glass rounded-xl p-4 text-center hover:bg-white/5 transition-colors group min-h-[80px] flex items-center justify-center"
+            >
+              <span className="text-white/70 group-hover:text-white text-xs sm:text-sm font-medium transition-colors">
+                {service.breadcrumbName}
+              </span>
+            </Link>
+          ))}
+        </m.div>
       </div>
     </section>
   );

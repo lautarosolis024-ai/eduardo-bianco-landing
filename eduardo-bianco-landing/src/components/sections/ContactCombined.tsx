@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { m, useInView } from "framer-motion";
 import { Send, Loader2, CheckCircle2, AlertCircle, MessageCircle, Mail, MapPin, ArrowUpRight } from "lucide-react";
 import { contactFormSchema, conflictTypeLabels } from "@/lib/validations";
@@ -8,9 +8,25 @@ import { getWhatsAppUrl, WHATSAPP_DISPLAY, CONTACT_EMAIL } from "@/lib/config";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
+// Cloudflare Turnstile site key (public, safe for client)
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+
+// Extend Window interface for Turnstile
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (container: string | HTMLElement, options: Record<string, unknown>) => string;
+      reset: (widgetId?: string) => void;
+      remove: (widgetId?: string) => void;
+    };
+  }
+}
+
 export default function ContactCombined() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const turnstileWidgetId = useRef<string>("");
 
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,10 +37,37 @@ export default function ContactCombined() {
     email: "",
     conflictType: "",
     description: "",
+    privacyConsent: false as boolean,
     honeypot: "",
+    turnstileToken: "",
   });
 
-  const handleChange = (field: string, value: string) => {
+  // Render Turnstile widget when form becomes visible
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY || !turnstileRef.current || !isInView) return;
+
+    // Small delay to ensure the container is in the DOM
+    const timer = setTimeout(() => {
+      if (window.turnstile && turnstileRef.current && !turnstileWidgetId.current) {
+        turnstileWidgetId.current = window.turnstile.render(turnstileRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          theme: "dark",
+          size: "normal",
+          callback: (token: string) => {
+            setFormData((prev) => ({ ...prev, turnstileToken: token }));
+          },
+          "error-callback": () => {
+            // On error, allow submission without token (graceful degradation)
+            setFormData((prev) => ({ ...prev, turnstileToken: "error-fallback" }));
+          },
+        });
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [isInView]);
+
+  const handleChange = (field: string, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (fieldErrors[field]) {
       setFieldErrors((prev) => {
@@ -64,14 +107,26 @@ export default function ContactCombined() {
 
       if (data.success) {
         setFormState("success");
-        setFormData({ name: "", phone: "", email: "", conflictType: "", description: "", honeypot: "" });
+        setFormData({ name: "", phone: "", email: "", conflictType: "", description: "", privacyConsent: false, honeypot: "", turnstileToken: "" });
+        // Reset Turnstile widget after successful submission
+        if (window.turnstile && turnstileWidgetId.current) {
+          window.turnstile.reset(turnstileWidgetId.current);
+        }
       } else {
         setFormState("error");
         setErrorMessage(data.message || "Error al enviar. Intente nuevamente.");
+        // Reset Turnstile on failure
+        if (window.turnstile && turnstileWidgetId.current) {
+          window.turnstile.reset(turnstileWidgetId.current);
+        }
       }
     } catch {
       setFormState("error");
       setErrorMessage("Error de conexión. Intente nuevamente o contáctese por WhatsApp.");
+      // Reset Turnstile on error
+      if (window.turnstile && turnstileWidgetId.current) {
+        window.turnstile.reset(turnstileWidgetId.current);
+      }
     }
   };
 
@@ -313,6 +368,34 @@ export default function ContactCombined() {
                   <span className="text-white/40 text-xs">{formData.description.length}/2000</span>
                 </div>
               </div>
+
+              {/* Privacy consent checkbox — Ley 25.326 compliance */}
+              <div>
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={formData.privacyConsent}
+                    onChange={(e) => handleChange("privacyConsent", e.target.checked)}
+                    className="mt-0.5 w-4 h-4 rounded border-white/30 bg-white/[0.07] text-[#D4875A] focus:ring-[#D4875A]/40 focus:ring-offset-0 accent-[#D4875A] shrink-0"
+                    required
+                    aria-required="true"
+                  />
+                  <span className="text-white/60 text-xs leading-relaxed group-hover:text-white/80 transition-colors">
+                    Acepto el tratamiento de mis datos personales conforme a la Ley 25.326.{" "}
+                    <a href="#privacy" className="text-[#D4875A] hover:text-[#c77a4f] underline underline-offset-2 transition-colors">
+                      Ver política de privacidad
+                    </a>
+                  </span>
+                </label>
+                {fieldErrors.privacyConsent && (
+                  <p className={`${errorClasses} ml-7`}>{fieldErrors.privacyConsent}</p>
+                )}
+              </div>
+
+              {/* Cloudflare Turnstile widget */}
+              {TURNSTILE_SITE_KEY && (
+                <div ref={turnstileRef} className="flex justify-start" />
+              )}
 
               <button
                 type="submit"

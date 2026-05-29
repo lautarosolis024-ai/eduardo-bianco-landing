@@ -25,7 +25,11 @@ export const contactFormSchema = z.object({
     .string()
     .min(10, "Describa brevemente su situaci\u00f3n (m\u00ednimo 10 caracteres)")
     .max(2000, "La descripci\u00f3n no puede exceder 2000 caracteres"),
+  privacyConsent: z.literal(true, {
+    message: "Debe aceptar el tratamiento de datos personales para enviar el formulario",
+  }),
   honeypot: z.string().max(0).optional(),
+  turnstileToken: z.string().optional(),
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;

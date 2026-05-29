@@ -13,6 +13,9 @@ export const dynamic = "force-dynamic";
 const RATE_LIMIT = 5;
 const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
+// Cloudflare Turnstile secret key (server-side only)
+const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY || "";
+
 // HMAC secret — derived from RESEND_API_KEY so no extra env var needed.
 // In production at scale, use a dedicated HMAC_SECRET env var.
 function getHmacSecret(): string {
@@ -80,6 +83,39 @@ function isRateLimited(cookieValue: string | undefined): { limited: boolean; sub
   return { limited: false, submissions };
 }
 
+/**
+ * Verify Cloudflare Turnstile token server-side.
+ * Gracefully degrades: if no secret key is configured, verification is skipped.
+ */
+async function verifyTurnstile(token: string | undefined): Promise<boolean> {
+  if (!TURNSTILE_SECRET_KEY) {
+    // No secret key configured — skip verification (graceful degradation)
+    console.warn("[Turnstile] TURNSTILE_SECRET_KEY not set, skipping verification");
+    return true;
+  }
+  if (!token || token === "error-fallback") {
+    // Token missing or error fallback — reject
+    return false;
+  }
+
+  try {
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        secret: TURNSTILE_SECRET_KEY,
+        response: token,
+      }),
+    });
+    const data = await response.json();
+    return data.success === true;
+  } catch (error) {
+    console.error("[Turnstile] Verification error:", error);
+    // On verification error, allow submission (fail open, not closed)
+    return true;
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting via signed cookie
@@ -104,13 +140,30 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Validate with zod
+    // Validate with zod (includes privacyConsent and turnstileToken)
     const result = contactFormSchema.safeParse(body);
     if (!result.success) {
       const errors = result.error.flatten().fieldErrors;
       const firstError = Object.values(errors).flat()[0] || "Datos inv\u00e1lidos";
       return NextResponse.json(
         { success: false, message: firstError },
+        { status: 400 }
+      );
+    }
+
+    // Server-side privacy consent verification (Ley 25.326)
+    if (!result.data.privacyConsent) {
+      return NextResponse.json(
+        { success: false, message: "Debe aceptar el tratamiento de datos personales." },
+        { status: 400 }
+      );
+    }
+
+    // Verify Turnstile token server-side
+    const turnstileValid = await verifyTurnstile(result.data.turnstileToken);
+    if (!turnstileValid) {
+      return NextResponse.json(
+        { success: false, message: "Verificación de seguridad fallida. Intente nuevamente." },
         { status: 400 }
       );
     }

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
+import Script from "next/script";
 import { MotionConfig, LazyMotion, domAnimation } from "framer-motion";
 import { PHONE_SCHEMA, CONTACT_EMAIL } from "@/lib/config";
 import AnalyticsConsent from "@/components/sections/AnalyticsConsent";
@@ -125,6 +126,42 @@ const breadcrumbJsonLd = {
   ],
 };
 
+// Person schema for Eduardo Bianco — E-E-A-T signal for Google Knowledge Graph
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Eduardo Julio Bianco",
+  jobTitle: "Abogado especialista en conflictos patrimoniales",
+  description: "Economista, Contador Público y Mediador con más de 20 años de experiencia en resolución de conflictos patrimoniales en Argentina.",
+  url: "https://eduardobianco.com.ar",
+  image: "https://eduardobianco.com.ar/og-image.png",
+  telephone: PHONE_SCHEMA,
+  email: CONTACT_EMAIL,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Buenos Aires",
+    addressRegion: "CABA",
+    addressCountry: "AR",
+  },
+  knowsAbout: [
+    "Mediación patrimonial",
+    "Peritaje económico",
+    "Resolución de conflictos patrimoniales",
+    "Herencias disputadas",
+    "Sucesiones",
+    "Arbitraje patrimonial",
+    "Planificación patrimonial",
+    "Conflictos entre socios",
+    "Propiedad compartida",
+  ],
+  sameAs: [],
+  worksFor: {
+    "@type": "LegalService",
+    name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
+    url: "https://eduardobianco.com.ar",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -136,6 +173,13 @@ export default function RootLayout({
         <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" />
         <link rel="dns-prefetch" href="https://d8j0ntlcm91z4.cloudfront.net" />
         <link rel="preload" as="video" href="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4" />
+        {/* Cloudflare Turnstile — loaded only if site key is configured */}
+        {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            strategy="lazyOnload"
+          />
+        )}
       </head>
       <body className={`${inter.variable} ${instrumentSerif.variable} font-sans antialiased bg-black text-white`}>
         <script
@@ -145,6 +189,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <LazyMotion features={domAnimation} strict>
           <MotionConfig reducedMotion="user">

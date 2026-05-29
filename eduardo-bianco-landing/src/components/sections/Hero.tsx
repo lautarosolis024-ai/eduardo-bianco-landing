@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useCallback } from "react";
-import { ArrowRight, MessageCircle, Phone, Globe } from "lucide-react";
+import { ArrowRight, MessageCircle, Phone, Globe, Shield } from "lucide-react";
 import { getWhatsAppUrl, VIDEO_URLS, PHONE_TEL } from "@/lib/config";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -190,13 +190,16 @@ export default function Hero() {
           el dinero se cruzan. Sin juicios. Sin desgaste.
         </p>
 
-        {/* Urgency badge + trust signal */}
-        <div className="mt-3 flex flex-col items-center gap-1">
-          <p className="text-white/70 text-xs">
-            Consulta gratuita · Cupos limitados mensuales
-          </p>
+        {/* Verified trust signals — no fake ratings */}
+        <div className="mt-3 flex flex-col items-center gap-2">
+          <div className="flex items-center gap-2">
+            <Shield className="w-3.5 h-3.5 text-[#D4875A]" aria-hidden="true" />
+            <p className="text-white/70 text-xs font-medium">
+              500+ conflictos resueltos · 20+ años de experiencia
+            </p>
+          </div>
           <p className="text-white/60 text-xs">
-            ★ ★ ★ ★ ★ 500+ conflictos resueltos
+            Consulta inicial gratuita · Cupos limitados mensuales
           </p>
         </div>
       </div>

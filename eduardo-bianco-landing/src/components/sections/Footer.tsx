@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { Globe, MessageCircle } from "lucide-react";
 import { getWhatsAppUrl, CONTACT_EMAIL } from "@/lib/config";
+import { servicesData } from "@/lib/services-data";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -25,7 +27,7 @@ export default function Footer() {
     <footer className="bg-black border-t border-white/5 px-6 py-16">
       <div className="max-w-6xl mx-auto">
         {/* Main footer grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Column 1: Brand + tagline */}
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -68,7 +70,25 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Column 3: Legal + Contact */}
+          {/* Column 3: Services (NEW) */}
+          <div>
+            <h3 className="text-white text-sm font-semibold mb-4 tracking-wider uppercase">
+              Servicios
+            </h3>
+            <nav className="flex flex-col gap-2">
+              {servicesData.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/servicios/${service.slug}`}
+                  className="text-white/60 hover:text-white text-sm transition-colors"
+                >
+                  {service.breadcrumbName}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Column 4: Legal + Contact */}
           <div>
             <h3 className="text-white text-sm font-semibold mb-4 tracking-wider uppercase">
               Legal

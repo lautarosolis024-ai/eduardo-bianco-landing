@@ -15,6 +15,16 @@ export function validateEnv() {
     }
   }
 
+  // Turnstile keys are optional — anti-spam protection degrades gracefully
+  const turnstileVars = ["NEXT_PUBLIC_TURNSTILE_SITE_KEY", "TURNSTILE_SECRET_KEY"];
+  for (const varName of turnstileVars) {
+    if (!process.env[varName]) {
+      console.warn(
+        `[ENV] ${varName} is not set. Turnstile anti-spam protection is disabled.`
+      );
+    }
+  }
+
   // EMAIL_FROM is critical in production — onboarding@resend.dev only delivers to account owner
   if (!process.env.EMAIL_FROM && process.env.NODE_ENV === "production") {
     console.error(

@@ -1,17 +1,25 @@
 import type { MetadataRoute } from "next";
+import { servicesData } from "@/lib/services-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://eduardobianco.com.ar";
 
-  // Only include the root URL — Google ignores hash-fragment URLs (/#about, /#services, etc.)
-  // in sitemaps per their specification. Single-page apps should list only the canonical root.
-  // Section anchors are still crawlable via on-page links but should not appear in sitemap.xml.
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-  ];
+  // Root URL — Google ignores hash-fragment URLs (/#about, /#services, etc.)
+  // in sitemaps per their specification.
+  const rootEntry: MetadataRoute.Sitemap[number] = {
+    url: baseUrl,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 1,
+  };
+
+  // Service pages — each with its own URL, priority, and change frequency
+  const serviceEntries: MetadataRoute.Sitemap = servicesData.map((service) => ({
+    url: `${baseUrl}/servicios/${service.slug}`,
+    lastModified: new Date(),
+    changeFrequency: service.changeFrequency,
+    priority: service.priority,
+  }));
+
+  return [rootEntry, ...serviceEntries];
 }
