@@ -3,34 +3,15 @@
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
 import { Shield, Lock, Eye, FileText } from "lucide-react";
-import { CONTACT_EMAIL } from "@/lib/config";
+import { CONTACT_EMAIL, PRIVACY_UPDATE_DATE } from "@/lib/config";
+import { privacyPoints } from "@/data/privacy-points";
 
-const privacyPoints = [
-  {
-    icon: Lock,
-    title: "Datos que recopilamos",
-    description:
-      "Solo recopilamos los datos que usted proporciona voluntariamente a través de nuestro formulario de contacto: nombre, teléfono, email y descripción de su situación. No utilizamos cookies de seguimiento ni recolectamos datos de navegación más allá de lo necesario para el funcionamiento del sitio.",
-  },
-  {
-    icon: Eye,
-    title: "Finalidad del tratamiento",
-    description:
-      "Sus datos personales se utilizan exclusivamente para responder su consulta y, en caso de avanzar, para la prestación de servicios profesionales de resolución de conflictos. No compartimos, vendemos ni transferimos sus datos a terceros bajo ninguna circunstancia.",
-  },
-  {
-    icon: Shield,
-    title: "Confidencialidad profesional",
-    description:
-      "Además de la protección legal bajo la Ley 25.326 de Protección de Datos Personales, nuestro ejercicio profesional está regido por el secreto profesional. Esto significa que su información está protegida por una doble capa de confidencialidad: legal y profesional.",
-  },
-  {
-    icon: FileText,
-    title: "Sus derechos",
-    description:
-      `Usted puede ejercer los derechos de acceso, rectificación, supresión y oposición sobre sus datos personales en cualquier momento contactándonos a ${CONTACT_EMAIL}. Responderemos dentro de los 10 días hábiles establecidos por la normativa vigente.`,
-  },
-];
+const iconMap: Record<string, React.ElementType> = {
+  Lock,
+  Eye,
+  Shield,
+  FileText,
+};
 
 export default function PrivacyPolicySection() {
   const ref = useRef(null);
@@ -66,10 +47,14 @@ export default function PrivacyPolicySection() {
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
           {privacyPoints.map((point, i) => {
-            const IconComp = point.icon;
+            const IconComp = iconMap[point.iconName] || Shield;
+            // Replace placeholder with actual email in the "derechos" description
+            const description = point.id === "derechos"
+              ? point.description
+              : point.description;
             return (
               <m.div
-                key={point.title}
+                key={point.id}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.15 * i }}
@@ -84,7 +69,9 @@ export default function PrivacyPolicySection() {
                       {point.title}
                     </h3>
                     <p className="text-white/80 text-sm leading-relaxed">
-                      {point.description}
+                      {point.id === "derechos"
+                        ? `Usted puede ejercer los derechos de acceso, rectificación, supresión y oposición sobre sus datos personales en cualquier momento contactándonos a ${CONTACT_EMAIL}. Responderemos dentro de los 10 días hábiles establecidos por la normativa vigente.`
+                        : point.description}
                     </p>
                   </div>
                 </div>
@@ -102,8 +89,7 @@ export default function PrivacyPolicySection() {
         >
           {`Responsable del tratamiento: Eduardo Julio Bianco — CUIT/CUIL a
           solicitud — Domicilio: Buenos Aires, Argentina. Para consultas sobre
-          datos personales: ${CONTACT_EMAIL}. Última actualización: mayo
-          2026.`}
+          datos personales: ${CONTACT_EMAIL}. Última actualización: ${PRIVACY_UPDATE_DATE}.`}
         </m.p>
       </div>
     </section>

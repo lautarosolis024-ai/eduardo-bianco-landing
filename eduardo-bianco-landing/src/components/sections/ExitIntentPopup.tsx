@@ -1,21 +1,30 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { X, BookOpen, ArrowRight } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/config";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 const EXIT_INTENT_KEY = "eb-exit-intent-dismissed";
 
 export default function ExitIntentPopup() {
   const [visible, setVisible] = useState(false);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const dismiss = useCallback(() => {
     setVisible(false);
     try {
       sessionStorage.setItem(EXIT_INTENT_KEY, "1");
     } catch {}
+    // Return focus to the element that was focused before the popup opened
+    previousFocusRef.current?.focus();
+    previousFocusRef.current = null;
   }, []);
+
+  // Lock body scroll when popup is visible
+  useBodyScrollLock(visible);
 
   useEffect(() => {
     // Don't show if already dismissed this session or on mobile (no mouse leave)
@@ -32,6 +41,8 @@ export default function ExitIntentPopup() {
     const handleMouseLeave = (e: MouseEvent) => {
       // Only trigger when cursor leaves through the top of the viewport
       if (e.clientY <= 0 && Date.now() - pageLoaded > minTime) {
+        // Store currently focused element before showing popup
+        previousFocusRef.current = document.activeElement as HTMLElement;
         setVisible(true);
         document.removeEventListener("mouseleave", handleMouseLeave);
       }
@@ -40,6 +51,44 @@ export default function ExitIntentPopup() {
     document.addEventListener("mouseleave", handleMouseLeave);
     return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, []);
+
+  // Move focus into dialog when it opens + focus trap
+  useEffect(() => {
+    if (!visible || !dialogRef.current) return;
+
+    // Move focus to first focusable element inside the dialog
+    const dialog = dialogRef.current;
+    const focusableElements = dialog.querySelectorAll<HTMLElement>(
+      'a[href], button, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstEl = focusableElements[0];
+    const lastEl = focusableElements[focusableElements.length - 1];
+
+    // Delay focus to allow animation to start
+    const focusTimer = setTimeout(() => firstEl?.focus(), 100);
+
+    // Focus trap
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      if (e.shiftKey) {
+        if (document.activeElement === firstEl) {
+          e.preventDefault();
+          lastEl?.focus();
+        }
+      } else {
+        if (document.activeElement === lastEl) {
+          e.preventDefault();
+          firstEl?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleTab);
+    return () => {
+      clearTimeout(focusTimer);
+      document.removeEventListener("keydown", handleTab);
+    };
+  }, [visible]);
 
   // Close on Escape key — WCAG requirement for modal dialogs
   useEffect(() => {
@@ -76,9 +125,10 @@ export default function ExitIntentPopup() {
             transition={{ duration: 0.3, type: "spring", damping: 25 }}
             className="fixed inset-0 z-[61] flex items-center justify-center p-4 pointer-events-none"
           >
-            <div className="liquid-glass rounded-2xl p-6 sm:p-8 max-w-md w-full pointer-events-auto relative">
+            <div ref={dialogRef} className="liquid-glass rounded-2xl p-6 sm:p-8 max-w-md w-full pointer-events-auto relative">
               {/* Close button */}
               <button
+                type="button"
                 onClick={dismiss}
                 className="absolute top-4 right-4 text-white/40 hover:text-white/70 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Cerrar"
@@ -111,6 +161,7 @@ export default function ExitIntentPopup() {
               </a>
 
               <button
+                type="button"
                 onClick={dismiss}
                 className="w-full text-white/40 hover:text-white/60 text-xs font-medium mt-4 transition-colors"
               >

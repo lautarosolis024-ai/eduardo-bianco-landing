@@ -53,7 +53,8 @@ export async function sendContactEmail(data: ContactFormValues): Promise<{ succe
     description: escapeHtml(sanitized.description),
   };
 
-  const subject = `Nueva consulta: ${sanitized.conflictType} - ${sanitized.name}`;
+  // Strip newlines from subject to prevent email header injection
+  const subject = `Nueva consulta: ${sanitized.conflictType} - ${sanitized.name}`.replace(/[\r\n]/g, " ");
 
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">

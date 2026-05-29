@@ -20,7 +20,7 @@ export default function FeaturedVideoSection() {
     >
       <div className="max-w-6xl mx-auto">
         {/* Visually hidden heading for aria-labelledby */}
-        <h2 id="enfoque-heading" className="sr-only">Nuestro Enfoque</h2>
+        <h2 id="enfoque-heading" className="sr-only">Nuestro Enfoque: Video y descripción de nuestra metodología</h2>
         <m.div
           initial={{ opacity: 0, y: 60 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -51,6 +51,7 @@ export default function FeaturedVideoSection() {
 
               <a
                 href="#services"
+                aria-label="Conocer más sobre nuestros servicios"
                 className="liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 self-start md:self-auto"
               >
                 Conocer más

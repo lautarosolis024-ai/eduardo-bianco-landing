@@ -72,6 +72,7 @@ export default function ServiceFAQ({ faqs, serviceName }: ServiceFAQProps) {
                 className="liquid-glass rounded-xl overflow-hidden"
               >
                 <button
+                  type="button"
                   id={`service-faq-button-${i}`}
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   className="w-full flex items-center justify-between p-5 sm:p-6 text-left hover:bg-white/5 transition-colors min-h-[44px]"

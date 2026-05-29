@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-const COOKIE_CONSENT_KEY = "eb-cookie-consent";
+import { COOKIE_CONSENT_KEY } from "@/lib/config";
 
 /**
  * AnalyticsConsent gates Vercel Analytics + Speed Insights behind cookie consent.

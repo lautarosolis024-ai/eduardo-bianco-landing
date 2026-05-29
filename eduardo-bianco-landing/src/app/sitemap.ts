@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 import { servicesData } from "@/lib/services-data";
+import { SITE_URL } from "@/lib/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://eduardobianco.com.ar";
+  const baseUrl = SITE_URL;
 
   // Root URL — Google ignores hash-fragment URLs (/#about, /#services, etc.)
   // in sitemaps per their specification.

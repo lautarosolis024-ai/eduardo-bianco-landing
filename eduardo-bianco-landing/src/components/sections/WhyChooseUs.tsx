@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
 import { Clock, TrendingUp, ListChecks, Shield, X } from "lucide-react";
-import { whyChooseUsItems } from "@/data/why-choose-us";
+import { whyChooseUsItems, comparisons } from "@/data/why-choose-us";
 
 const iconMap: Record<string, React.ElementType> = {
   Clock,
@@ -11,13 +11,6 @@ const iconMap: Record<string, React.ElementType> = {
   ListChecks,
   Shield,
 };
-
-const comparisons = [
-  { we: "Resolución en 30-120 días", they: "Juicios de 2-5 años", icon: Clock },
-  { we: "Costo fijo y predecible", they: "Honorarios abiertos + costas judiciales", icon: TrendingUp },
-  { we: "Acuerdos que preservan relaciones", they: "Sentencias que destruyen vínculos", icon: ListChecks },
-  { we: "100% confidencial", they: "Expedientes públicos", icon: Shield },
-];
 
 export default function WhyChooseUs() {
   const ref = useRef(null);
@@ -89,10 +82,10 @@ export default function WhyChooseUs() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
             {comparisons.map((comp, i) => {
-              const IconComp = comp.icon;
+              const IconComp = iconMap[comp.iconName] || Clock;
               return (
                 <m.div
-                  key={i}
+                  key={comp.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.7 + 0.1 * i }}

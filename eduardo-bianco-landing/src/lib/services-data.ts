@@ -4,6 +4,8 @@
  * FAQ items, and JSON-LD schema markup.
  */
 
+import { SITE_URL } from "@/lib/config";
+
 export interface ServiceFAQ {
   question: string;
   answer: string;
@@ -31,7 +33,8 @@ export interface ServiceData {
   priority: number;
 }
 
-const BASE_URL = "https://eduardobianco.com.ar";
+// Use SITE_URL from config instead of local constant
+const BASE_URL = SITE_URL;
 
 export const servicesData: ServiceData[] = [
   // ============================================================

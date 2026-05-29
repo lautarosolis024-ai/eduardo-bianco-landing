@@ -217,8 +217,8 @@ export default function ContactCombined() {
           </m.div>
         </div>
 
-        {/* Form */}
-        <div className="max-w-2xl">
+        {/* Form — aria-live announces state changes to screen readers */}
+        <div className="max-w-2xl" aria-live="polite">
           {formState === "success" ? (
             <m.div
               initial={{ opacity: 0, scale: 0.95 }}

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import Script from "next/script";
 import { MotionConfig, LazyMotion, domAnimation } from "framer-motion";
-import { PHONE_SCHEMA, CONTACT_EMAIL, VIDEO_URLS } from "@/lib/config";
+import { PHONE_SCHEMA, CONTACT_EMAIL, VIDEO_URLS, SITE_URL, PROFESSIONAL_TITLE } from "@/lib/config";
 import AnalyticsConsent from "@/components/sections/AnalyticsConsent";
 import "./globals.css";
 
@@ -27,7 +27,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://eduardobianco.com.ar"),
+  metadataBase: new URL(SITE_URL),
   title: "Eduardo Bianco | Resolución de Conflictos Patrimoniales",
   description:
     "Especialista en resolución de conflictos patrimoniales. Economista, Contador y Mediador con más de 20 años de experiencia. Herencias, socios, propiedades compartidas.",
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Eduardo Julio Bianco" }],
   alternates: {
-    canonical: "https://eduardobianco.com.ar",
-    languages: { "es-AR": "https://eduardobianco.com.ar" },
+    canonical: SITE_URL,
+    languages: { "es-AR": SITE_URL },
   },
   robots: { index: true, follow: true },
   icons: {
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Eduardo Bianco | Resolución de Conflictos Patrimoniales",
     description:
       "Especialista en resolución de conflictos patrimoniales. Economista, Contador y Mediador con más de 20 años de experiencia.",
-    url: "https://eduardobianco.com.ar",
+    url: SITE_URL,
     siteName: "Eduardo Bianco",
     type: "website",
     locale: "es_AR",
@@ -83,7 +83,7 @@ const jsonLd = {
   "@type": "ProfessionalService",
   name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
   description: "Especialista en resolución de conflictos patrimoniales. Economista, Contador y Mediador con más de 20 años de experiencia.",
-  url: "https://eduardobianco.com.ar",
+  url: SITE_URL,
   telephone: PHONE_SCHEMA,
   email: CONTACT_EMAIL,
   address: {
@@ -121,7 +121,7 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Inicio",
-      item: "https://eduardobianco.com.ar",
+      item: SITE_URL,
     },
   ],
 };
@@ -131,10 +131,10 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Eduardo Julio Bianco",
-  jobTitle: "Economista, Contador Público y Mediador — Especialista en conflictos patrimoniales",
+  jobTitle: `${PROFESSIONAL_TITLE} — Especialista en conflictos patrimoniales`,
   description: "Economista, Contador Público y Mediador con más de 20 años de experiencia en resolución de conflictos patrimoniales en Argentina.",
-  url: "https://eduardobianco.com.ar",
-  image: "https://eduardobianco.com.ar/og-image.png",
+  url: SITE_URL,
+  image: `${SITE_URL}/og-image.png`,
   telephone: PHONE_SCHEMA,
   email: CONTACT_EMAIL,
   address: {
@@ -157,7 +157,7 @@ const personJsonLd = {
   worksFor: {
     "@type": "ProfessionalService",
     name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
-    url: "https://eduardobianco.com.ar",
+    url: SITE_URL,
   },
 };
 

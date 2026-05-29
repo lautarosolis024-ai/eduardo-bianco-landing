@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Globe, MessageCircle } from "lucide-react";
-import { getWhatsAppUrl, CONTACT_EMAIL } from "@/lib/config";
+import { getWhatsAppUrl, CONTACT_EMAIL, CREDENTIALS_DISPLAY } from "@/lib/config";
 import { servicesData } from "@/lib/services-data";
 
 export default function Footer() {
@@ -57,7 +57,7 @@ export default function Footer() {
             <h3 className="text-white text-sm font-semibold mb-4 tracking-wider uppercase">
               Navegación
             </h3>
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-2" aria-label="Navegación principal">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -75,7 +75,7 @@ export default function Footer() {
             <h3 className="text-white text-sm font-semibold mb-4 tracking-wider uppercase">
               Servicios
             </h3>
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-2" aria-label="Servicios">
               {servicesData.map((service) => (
                 <Link
                   key={service.slug}
@@ -93,7 +93,7 @@ export default function Footer() {
             <h3 className="text-white text-sm font-semibold mb-4 tracking-wider uppercase">
               Legal
             </h3>
-            <nav className="flex flex-col gap-2 mb-6">
+            <nav className="flex flex-col gap-2 mb-6" aria-label="Enlaces legales">
               {legalLinks.map((link) => (
                 <a
                   key={link.label}
@@ -121,7 +121,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-white/5 flex flex-col gap-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-white/60 text-xs text-center md:text-left">
-              &copy; {currentYear} Eduardo Bianco &middot; Economista &middot; Contador Público &middot; Mediador
+              &copy; {currentYear} Eduardo Bianco &middot; {CREDENTIALS_DISPLAY}
             </p>
             <p className="text-white/60 text-xs text-center md:text-right">
               Protección de datos personales conforme a la Ley 25.326

@@ -12,6 +12,7 @@ import ScrollToTop from "@/components/sections/ScrollToTop";
 import CookieConsent from "@/components/sections/CookieConsent";
 import { Suspense } from "react";
 import SectionSkeleton from "@/components/sections/SectionSkeleton";
+import { SITE_URL, PHONE_SCHEMA } from "@/lib/config";
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;
@@ -87,8 +88,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
     provider: {
       "@type": "ProfessionalService",
       name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
-      url: "https://eduardobianco.com.ar",
-      telephone: "+5491145779160",
+      url: SITE_URL,
+      telephone: PHONE_SCHEMA,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Buenos Aires",
@@ -118,13 +119,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Inicio",
-        item: "https://eduardobianco.com.ar",
+        item: SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Servicios",
-        item: "https://eduardobianco.com.ar/#services",
+        item: `${SITE_URL}/#services`,
       },
       {
         "@type": "ListItem",

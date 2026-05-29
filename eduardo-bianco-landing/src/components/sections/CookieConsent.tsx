@@ -1,13 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { Shield, X } from "lucide-react";
-
-const COOKIE_CONSENT_KEY = "eb-cookie-consent";
+import { COOKIE_CONSENT_KEY } from "@/lib/config";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
+  const acceptRef = useRef<HTMLButtonElement>(null);
+
+  // Lock body scroll when dialog is visible
+  useBodyScrollLock(visible);
 
   useEffect(() => {
     // Only show if user hasn't already consented
@@ -18,6 +22,14 @@ export default function CookieConsent() {
       return () => clearTimeout(timer);
     }
   }, []);
+
+  // Auto-focus the accept button when dialog appears
+  useEffect(() => {
+    if (visible && acceptRef.current) {
+      const timer = setTimeout(() => acceptRef.current?.focus(), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [visible]);
 
   const accept = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ accepted: true, date: new Date().toISOString() }));
@@ -52,12 +64,15 @@ export default function CookieConsent() {
               </p>
               <div className="flex items-center gap-3">
                 <button
+                  ref={acceptRef}
+                  type="button"
                   onClick={accept}
                   className="bg-[#D4875A] hover:bg-[#c77a4f] text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full transition-colors min-h-[44px]"
                 >
                   Aceptar
                 </button>
                 <button
+                  type="button"
                   onClick={decline}
                   className="text-white/70 hover:text-white text-xs sm:text-sm font-medium transition-colors min-h-[44px] px-2"
                 >
@@ -66,6 +81,7 @@ export default function CookieConsent() {
               </div>
             </div>
             <button
+              type="button"
               onClick={decline}
               className="text-white/40 hover:text-white/70 transition-colors shrink-0 p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Cerrar aviso de cookies"

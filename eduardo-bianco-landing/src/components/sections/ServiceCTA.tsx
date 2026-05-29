@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
 import { ArrowRight, MessageCircle, Phone } from "lucide-react";
-import { getWhatsAppUrl } from "@/lib/config";
+import { getWhatsAppUrl, BUSINESS_STATS } from "@/lib/config";
 
 interface ServiceCTAProps {
   whatsappMessage: string;
@@ -20,6 +20,8 @@ export default function ServiceCTA({
   return (
     <section
       ref={ref}
+      role="region"
+      aria-labelledby="service-cta-heading"
       className="bg-black py-16 md:py-24 px-6"
     >
       <m.div
@@ -30,7 +32,7 @@ export default function ServiceCTA({
       >
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,135,90,0.05)_0%,_transparent_60%)] pointer-events-none rounded-3xl" />
 
-        <h2 className="text-3xl md:text-4xl lg:text-5xl text-white tracking-tight font-instrument mb-4">
+        <h2 id="service-cta-heading" className="text-3xl md:text-4xl lg:text-5xl text-white tracking-tight font-instrument mb-4">
           ¿Necesitás ayuda con{" "}
           <em className="italic text-white/70">{serviceName.toLowerCase()}</em>?
         </h2>
@@ -60,7 +62,7 @@ export default function ServiceCTA({
         </div>
 
         <p className="text-white/50 text-xs mt-6">
-          500+ conflictos resueltos · 20+ años de experiencia · Consulta inicial gratuita
+          {BUSINESS_STATS.casesResolved} conflictos resueltos · {BUSINESS_STATS.yearsExperience} años de experiencia · Consulta inicial gratuita
         </p>
       </m.div>
     </section>

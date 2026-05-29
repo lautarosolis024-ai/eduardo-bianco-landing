@@ -22,6 +22,8 @@ export default function ServicePageHero({
   return (
     <section
       ref={ref}
+      role="region"
+      aria-labelledby="service-hero-heading"
       className="min-h-[60vh] md:min-h-[70vh] overflow-hidden relative flex flex-col justify-center px-6 pt-24 pb-16 md:pt-32 md:pb-20"
     >
       {/* Background gradient */}
@@ -55,7 +57,7 @@ export default function ServicePageHero({
             </ol>
           </nav>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight font-instrument mb-6 leading-[1.1]">
+          <h1 id="service-hero-heading" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight font-instrument mb-6 leading-[1.1]">
             {h1}
           </h1>
 

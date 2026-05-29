@@ -27,7 +27,9 @@ export function middleware(request: NextRequest) {
     "max-age=31536000; includeSubDomains; preload"
   );
 
-  // Content Security Policy — restrictive but allows necessary resources
+  // Content Security Policy — restrictive but allows necessary resources.
+  // NOTE: 'unsafe-inline' and 'unsafe-eval' are required for Next.js runtime
+  // and framer-motion animations. Long-term, migrate to nonce-based CSP.
   response.headers.set(
     "Content-Security-Policy",
     [

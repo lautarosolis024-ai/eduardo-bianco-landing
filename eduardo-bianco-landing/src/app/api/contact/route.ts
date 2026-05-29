@@ -19,8 +19,12 @@ const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY || "";
 // HMAC secret — derived from RESEND_API_KEY so no extra env var needed.
 // In production at scale, use a dedicated HMAC_SECRET env var.
 function getHmacSecret(): string {
-  const key = process.env.RESEND_API_KEY || "fallback-dev-secret-do-not-use-in-prod";
-  return `rl-hmac-${key.slice(0, 16)}`;
+  const key = process.env.RESEND_API_KEY;
+  if (!key && process.env.NODE_ENV === "production") {
+    // In production, refuse to use the fallback — it would make rate limiting trivially bypassable
+    throw new Error("RESEND_API_KEY is required in production for HMAC rate-limit signing");
+  }
+  return `rl-hmac-${(key || "fallback-dev-secret-do-not-use-in-prod").slice(0, 16)}`;
 }
 
 /**

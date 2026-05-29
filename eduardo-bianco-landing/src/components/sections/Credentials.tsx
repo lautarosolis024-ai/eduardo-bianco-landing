@@ -85,7 +85,7 @@ export default function Credentials() {
                 {credentials.map((cred, i) => {
                   const IconComp = cred.icon;
                   return (
-                    <li key={i} className="flex items-start gap-3">
+                    <li key={cred.text} className="flex items-start gap-3">
                       <IconComp className="h-4 w-4 text-white/60 mt-0.5 shrink-0" />
                       <span className="text-sm text-white/70">{cred.text}</span>
                     </li>

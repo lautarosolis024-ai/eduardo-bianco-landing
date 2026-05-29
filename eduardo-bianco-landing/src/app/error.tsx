@@ -11,14 +11,19 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("Application error:", error);
+    // Log only the message and digest — never the full stack in production
+    console.error("Application error:", error.message, error.digest ? `digest: ${error.digest}` : "");
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-6">
+    <div
+      className="min-h-screen bg-black flex items-center justify-center px-6"
+      role="alert"
+    >
       <div className="liquid-glass rounded-2xl p-8 md:p-12 max-w-md w-full text-center">
         <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6">
-          <span className="text-2xl">⚠</span>
+          <span className="text-2xl" aria-hidden="true">⚠</span>
+          <span className="sr-only">Error</span>
         </div>
         <h2 className="text-2xl font-bold text-white mb-3">Algo salió mal</h2>
         <p className="text-white/70 text-sm mb-6 leading-relaxed">
@@ -26,6 +31,7 @@ export default function Error({
         </p>
         <div className="flex flex-col gap-3">
           <button
+            type="button"
             onClick={reset}
             className="w-full bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-xl py-3 text-sm font-semibold transition-colors min-h-[44px]"
           >

@@ -26,8 +26,15 @@ const ExitIntentPopup = dynamic(() => import("@/components/sections/ExitIntentPo
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-black">
+      {/* Skip to content link for keyboard users — WCAG 2.4.1 */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold"
+      >
+        Saltar al contenido
+      </a>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1" aria-label="Contenido principal">
         <Hero />
         <AboutSection />
         <FeaturedVideoSection />
@@ -62,11 +69,21 @@ export default function Home() {
           <PrivacyPolicySection />
         </Suspense>
       </main>
-      <Footer />
-      <WhatsAppButton />
-      <ScrollToTop />
-      <CookieConsent />
-      <ExitIntentPopup />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
+      <Suspense fallback={null}>
+        <WhatsAppButton />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ScrollToTop />
+      </Suspense>
+      <Suspense fallback={null}>
+        <CookieConsent />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ExitIntentPopup />
+      </Suspense>
     </div>
   );
 }

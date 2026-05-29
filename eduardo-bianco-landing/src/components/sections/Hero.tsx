@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useCallback } from "react";
 import { ArrowRight, MessageCircle, Phone, Globe, Shield } from "lucide-react";
-import { getWhatsAppUrl, VIDEO_URLS, PHONE_TEL } from "@/lib/config";
+import { getWhatsAppUrl, VIDEO_URLS, PHONE_TEL, CREDENTIALS_DISPLAY, BUSINESS_STATS } from "@/lib/config";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 function animateOpacity(
@@ -95,14 +95,7 @@ export default function Hero() {
   }, [handleCanPlay, handleTimeUpdate, handleEnded, handleVideoError]);
 
   return (
-    <section className="min-h-[85vh] md:min-h-screen overflow-hidden relative flex flex-col">
-      {/* Skip to content link for keyboard users */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold"
-      >
-        Saltar al contenido
-      </a>
+    <section className="min-h-[85vh] md:min-h-screen overflow-hidden relative flex flex-col" role="region" aria-label="Presentación principal">
 
       {/* Background video (decorative — no speech) */}
       <video
@@ -121,11 +114,11 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(212,135,90,0.05)]" />
 
       {/* Hero content */}
-      <div id="main-content" className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-10 text-center -translate-y-[5%] md:-translate-y-[10%]">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-10 text-center -translate-y-[5%] md:-translate-y-[10%]">
         {/* Differentiator headline: credentials as hero statement */}
         <div className="flex items-center gap-2 mb-6">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-white/70 text-xs font-medium tracking-wide">
-            Economista · Contador · Mediador
+            {CREDENTIALS_DISPLAY}
           </span>
         </div>
 
@@ -195,7 +188,7 @@ export default function Hero() {
           <div className="flex items-center gap-2">
             <Shield className="w-3.5 h-3.5 text-[#D4875A]" aria-hidden="true" />
             <p className="text-white/70 text-xs font-medium">
-              500+ conflictos resueltos · 20+ años de experiencia
+              {BUSINESS_STATS.casesResolved} conflictos resueltos · {BUSINESS_STATS.yearsExperience} años de experiencia
             </p>
           </div>
           <p className="text-white/60 text-xs">

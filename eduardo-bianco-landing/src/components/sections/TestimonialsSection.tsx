@@ -9,10 +9,10 @@ export default function TestimonialsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Build Review-only structured data (root LegalService schema is in layout.tsx)
+  // Build Review-only structured data (root ProfessionalService schema is in layout.tsx)
   const reviewsJsonLd = {
     "@context": "https://schema.org",
-    "@type": "LegalService",
+    "@type": "ProfessionalService",
     name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
     review: testimonials.map((t) => ({
       "@type": "Review",
@@ -74,7 +74,7 @@ export default function TestimonialsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {testimonials.map((t, i) => (
             <m.div
-              key={i}
+              key={t.name}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.15 * i }}

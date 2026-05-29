@@ -6,6 +6,7 @@ import { m, AnimatePresence } from "framer-motion";
 import { Globe, Menu, X, ChevronDown } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/config";
 import { servicesData } from "@/lib/services-data";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 const navLinks = [
   { href: "#about", label: "Nosotros" },
@@ -23,6 +24,9 @@ export default function Navbar() {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Lock body scroll when mobile menu is open
+  useBodyScrollLock(menuOpen);
 
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
@@ -163,6 +167,7 @@ export default function Navbar() {
                 onMouseLeave={scheduleClose}
               >
                 <button
+                  type="button"
                   onClick={() => setServicesOpen((prev) => !prev)}
                   className={`flex items-center gap-1 text-sm font-medium transition-colors py-2 ${
                     activeSection === "services"
@@ -238,6 +243,7 @@ export default function Navbar() {
             Contacto
           </a>
           <button
+            type="button"
             ref={menuButtonRef}
             className="lg:hidden liquid-glass rounded-full p-2 text-white hover:bg-white/5 transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -316,6 +322,7 @@ function MobileServicesAccordion({
   return (
     <div className="border-l border-white/10 ml-2 pl-4">
       <button
+        type="button"
         onClick={() => setExpanded((prev) => !prev)}
         className={`flex items-center justify-between w-full text-base font-medium transition-colors py-2 px-2 ${
           activeSection === "services"

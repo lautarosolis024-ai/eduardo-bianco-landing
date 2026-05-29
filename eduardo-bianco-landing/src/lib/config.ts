@@ -1,8 +1,11 @@
 /**
  * Centralized site configuration.
- * Single source of truth for WhatsApp numbers, emails, and other business constants.
+ * Single source of truth for WhatsApp numbers, emails, URLs, and other business constants.
  * This prevents the inconsistent-number bug found in the CEO/DevEx reviews.
  */
+
+/** The canonical site URL — used in sitemap, robots, JSON-LD, OG tags, and canonical links. */
+export const SITE_URL = "https://eduardobianco.com.ar";
 
 // The canonical WhatsApp phone number in international format (no +, no spaces)
 export const WHATSAPP_PHONE = "5491145779160";
@@ -40,6 +43,18 @@ export const BUSINESS_STATS = {
   daysToResults: "30-120",
   satisfactionRate: "98%",
 } as const;
+
+/** Professional credentials displayed in hero, footer, and other sections. */
+export const CREDENTIALS_DISPLAY = "Economista · Contador · Mediador" as const;
+
+/** Full professional title for JSON-LD and formal contexts. */
+export const PROFESSIONAL_TITLE = "Economista, Contador Público y Mediador" as const;
+
+/** Privacy policy last update date — update when policy changes. */
+export const PRIVACY_UPDATE_DATE = "mayo 2026" as const;
+
+/** Shared localStorage key for cookie consent — prevents duplication between CookieConsent and AnalyticsConsent. */
+export const COOKIE_CONSENT_KEY = "eb-cookie-consent" as const;
 
 // Video CDN URLs (single source of truth)
 export const VIDEO_URLS = {

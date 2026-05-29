@@ -1,5 +1,39 @@
 import type { WhyChooseUsItem } from "@/lib/types";
 
+export interface Comparison {
+  id: string;
+  we: string;
+  they: string;
+  iconName: string;
+}
+
+export const comparisons: Comparison[] = [
+  {
+    id: "rapida-vs-lenta",
+    we: "Resolución en 30-120 días",
+    they: "Juicios de 2-5 años",
+    iconName: "Clock",
+  },
+  {
+    id: "fijo-vs-abierto",
+    we: "Costo fijo y predecible",
+    they: "Honorarios abiertos + costas judiciales",
+    iconName: "TrendingUp",
+  },
+  {
+    id: "acuerdo-vs-sentencia",
+    we: "Acuerdos que preservan relaciones",
+    they: "Sentencias que destruyen vínculos",
+    iconName: "ListChecks",
+  },
+  {
+    id: "confidencial-vs-publico",
+    we: "100% confidencial",
+    they: "Expedientes públicos",
+    iconName: "Shield",
+  },
+];
+
 export const whyChooseUsItems: WhyChooseUsItem[] = [
   {
     id: "rapida-resolucion",

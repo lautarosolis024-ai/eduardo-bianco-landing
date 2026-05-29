@@ -17,6 +17,8 @@ export default function ServicePageContent({
   return (
     <section
       ref={ref}
+      role="region"
+      aria-labelledby={`content-heading-${contentBlocks[0]?.heading?.slice(0, 20) ?? "section"}`}
       className="bg-black py-16 md:py-24 px-6"
     >
       <div className="max-w-3xl mx-auto">
