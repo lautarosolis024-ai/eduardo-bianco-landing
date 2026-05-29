@@ -113,7 +113,7 @@ export default function Hero() {
         muted
         autoPlay
         playsInline
-        preload="auto"
+        preload="metadata"
         poster="/og-image.png"
         aria-hidden="true"
       />
@@ -121,7 +121,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(212,135,90,0.05)]" />
 
       {/* Hero content */}
-      <div id="main-content" role="main" className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-10 text-center -translate-y-[5%] md:-translate-y-[10%]">
+      <div id="main-content" className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-10 text-center -translate-y-[5%] md:-translate-y-[10%]">
         {/* Differentiator headline: credentials as hero statement */}
         <div className="flex items-center gap-2 mb-6">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-white/70 text-xs font-medium tracking-wide">

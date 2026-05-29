@@ -88,7 +88,7 @@ export const servicesData: ServiceData[] = [
       {
         question: "¿Qué pasa si la otra parte no quiere mediar?",
         answer:
-          "Si la mediación es obligatoria en su jurisdicción, la otra parte está obligada a asistir a la primera sesión informativa. Si después de esa sesión decide no continuar, se emite un certificado que le permite iniciar la vía judicial. Si la mediación no es obligatoria y la otra parte rechaza participar, evaluamos together las alternativas: negociación directa asistida, arbitraje o, como última opción, la vía judicial.",
+          "Si la mediación es obligatoria en su jurisdicción, la otra parte está obligada a asistir a la primera sesión informativa. Si después de esa sesión decide no continuar, se emite un certificado que le permite iniciar la vía judicial. Si la mediación no es obligatoria y la otra parte rechaza participar, evaluamos conjuntamente las alternativas: negociación directa asistida, arbitraje o, como última opción, la vía judicial.",
       },
       {
         question: "¿El acuerdo de mediación es vinculante?",

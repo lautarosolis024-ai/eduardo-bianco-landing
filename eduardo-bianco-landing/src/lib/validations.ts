@@ -8,7 +8,8 @@ export const contactFormSchema = z.object({
   phone: z
     .string()
     .min(6, "Ingrese un tel\u00e9fono v\u00e1lido")
-    .max(30, "El tel\u00e9fono no puede exceder 30 caracteres"),
+    .max(30, "El tel\u00e9fono no puede exceder 30 caracteres")
+    .regex(/^[\d\s+\-()]+$/, "Ingrese un tel\u00e9fono v\u00e1lido"),
   email: z.string().email("Ingrese un email v\u00e1lido"),
   conflictType: z.enum(
     [
@@ -45,7 +46,7 @@ export const conflictTypeLabels: Record<string, string> = {
 export function sanitizeInput(input: string): string {
   return input
     .replace(/<[^>]*>/g, "")
-    .replace(/[^\w\s\u00C0-\u024F\u1E00-\u1EFF.,;:!?@()\-+/"']$/gmu, "")
+    .replace(/[^\w\s\u00C0-\u024F\u1E00-\u1EFF.,;:!?@()\-+/"']/gu, "")
     .trim();
 }
 

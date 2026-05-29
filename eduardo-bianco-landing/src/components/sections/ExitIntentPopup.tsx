@@ -41,6 +41,16 @@ export default function ExitIntentPopup() {
     return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, []);
 
+  // Close on Escape key — WCAG requirement for modal dialogs
+  useEffect(() => {
+    if (!visible) return;
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") dismiss();
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [visible, dismiss]);
+
   return (
     <AnimatePresence>
       {visible && (
@@ -70,7 +80,7 @@ export default function ExitIntentPopup() {
               {/* Close button */}
               <button
                 onClick={dismiss}
-                className="absolute top-4 right-4 text-white/40 hover:text-white/70 transition-colors"
+                className="absolute top-4 right-4 text-white/40 hover:text-white/70 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Cerrar"
               >
                 <X className="w-5 h-5" />

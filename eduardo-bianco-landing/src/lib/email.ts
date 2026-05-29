@@ -22,12 +22,16 @@ const EMAIL_FROM = process.env.EMAIL_FROM ||
   (process.env.NODE_ENV === "production"
     ? undefined  // Will fail loudly in production if not set
     : "Eduardo Bianco <onboarding@resend.dev>");
-const EMAIL_TO = process.env.EMAIL_TO || "ejuliobianco@gmail.com";
+const EMAIL_TO = process.env.EMAIL_TO || (process.env.NODE_ENV === "production" ? undefined : "ejuliobianco@gmail.com");
 
 export async function sendContactEmail(data: ContactFormValues): Promise<{ success: boolean; message: string }> {
   // In production, EMAIL_FROM must be explicitly set to a verified domain sender
   if (!EMAIL_FROM) {
     console.error("[EMAIL] EMAIL_FROM is not set. In production, set this to a verified Resend sender address.");
+    return { success: false, message: "El servicio de email no está configurado. Por favor, contáctese por WhatsApp." };
+  }
+  if (!EMAIL_TO) {
+    console.error("[EMAIL] EMAIL_TO is not set. In production, set this to the recipient email address.");
     return { success: false, message: "El servicio de email no está configurado. Por favor, contáctese por WhatsApp." };
   }
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createHmac } from "crypto";
+import { createHmac, timingSafeEqual } from "crypto";
 import { contactFormSchema } from "@/lib/validations";
 import { sendContactEmail } from "@/lib/email";
 import { validateEnv } from "@/lib/env";
@@ -41,9 +41,8 @@ function signPayload(payload: string): string {
 
 function verifyPayload(payload: string, signature: string): boolean {
   const expected = signPayload(payload);
-  // Timing-safe comparison would be ideal but HMAC digests are fixed-length hex
-  // so timing attacks are not practical here
-  return expected === signature;
+  if (expected.length !== signature.length) return false;
+  return timingSafeEqual(Buffer.from(expected), Buffer.from(signature));
 }
 
 interface CookieData {
@@ -111,8 +110,8 @@ async function verifyTurnstile(token: string | undefined): Promise<boolean> {
     return data.success === true;
   } catch (error) {
     console.error("[Turnstile] Verification error:", error);
-    // On verification error, allow submission (fail open, not closed)
-    return true;
+    // Fail closed — reject submission on verification error
+    return false;
   }
 }
 
@@ -129,7 +128,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Parse body
+    // Parse body with size limit (reject >10KB payloads)
+    const contentLength = request.headers.get("content-length");
+    if (contentLength && parseInt(contentLength, 10) > 10240) {
+      return NextResponse.json(
+        { success: false, message: "Payload demasiado grande." },
+        { status: 413 }
+      );
+    }
     const body = await request.json();
 
     // Honeypot check — if filled, silently accept (bot detection)

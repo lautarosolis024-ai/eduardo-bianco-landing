@@ -26,7 +26,7 @@ export default function ServiceCTA({
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
-        className="max-w-2xl mx-auto liquid-glass rounded-3xl p-8 md:p-12 text-center"
+        className="max-w-2xl mx-auto liquid-glass rounded-3xl p-8 md:p-12 text-center relative"
       >
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,135,90,0.05)_0%,_transparent_60%)] pointer-events-none rounded-3xl" />
 

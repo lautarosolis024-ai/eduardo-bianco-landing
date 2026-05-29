@@ -52,7 +52,9 @@ export default function Home() {
         <Suspense fallback={<SectionSkeleton />}>
           <Credentials />
         </Suspense>
-        <ContactCombined />
+        <Suspense fallback={<SectionSkeleton />}>
+          <ContactCombined />
+        </Suspense>
         <Suspense fallback={<SectionSkeleton />}>
           <FAQSection />
         </Suspense>

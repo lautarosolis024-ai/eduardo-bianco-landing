@@ -49,10 +49,8 @@ export default function LazyVideo({
   captionsLang = "es",
 }: LazyVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  // If no IntersectionObserver, load immediately
-  const [shouldLoad, setShouldLoad] = useState(
-    typeof window !== "undefined" && !("IntersectionObserver" in window)
-  );
+  // Start with false — useEffect will set to true if IO not supported (avoids SSR mismatch)
+  const [shouldLoad, setShouldLoad] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   // Handle video load errors gracefully
@@ -62,10 +60,13 @@ export default function LazyVideo({
 
   useEffect(() => {
     const el = videoRef.current;
-    if (!el) return;
 
-    // Already loading (no IO support — set in useState init)
-    if (!("IntersectionObserver" in window)) return;
+    // If no IntersectionObserver support, load immediately
+    if (!("IntersectionObserver" in window)) {
+      setShouldLoad(true);
+      return;
+    }
+    if (!el) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {

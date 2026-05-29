@@ -1,13 +1,14 @@
-"use client";
+import type { Metadata } from "next";
 
-import { getWhatsAppUrl } from "@/lib/config";
-import { ArrowLeft, MessageCircle } from "lucide-react";
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center px-6">
       <div className="max-w-md w-full text-center">
-        <h1 className="text-8xl text-white mb-4" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>404</h1>
+        <h1 className="text-8xl text-white mb-4 font-instrument">404</h1>
         <h2 className="text-xl font-semibold text-white mb-3">
           Página no encontrada
         </h2>
@@ -20,16 +21,14 @@ export default function NotFound() {
             href="/"
             className="inline-flex items-center justify-center gap-2 bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-xl px-6 py-3 text-sm font-semibold transition-colors min-h-[44px]"
           >
-            <ArrowLeft className="w-4 h-4" />
             Volver al inicio
           </a>
           <a
-            href={getWhatsAppUrl("Hola Eduardo, necesito una consulta sobre un conflicto patrimonial.")}
+            href="https://wa.me/5491145779160?text=Hola%20Eduardo%2C%20necesito%20una%20consulta%20sobre%20un%20conflicto%20patrimonial."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 liquid-glass rounded-xl px-6 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors min-h-[44px]"
           >
-            <MessageCircle className="w-4 h-4" />
             Consultar por WhatsApp
           </a>
         </div>

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import Script from "next/script";
 import { MotionConfig, LazyMotion, domAnimation } from "framer-motion";
-import { PHONE_SCHEMA, CONTACT_EMAIL } from "@/lib/config";
+import { PHONE_SCHEMA, CONTACT_EMAIL, VIDEO_URLS } from "@/lib/config";
 import AnalyticsConsent from "@/components/sections/AnalyticsConsent";
 import "./globals.css";
 
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "LegalService",
+  "@type": "ProfessionalService",
   name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
   description: "Especialista en resolución de conflictos patrimoniales. Economista, Contador y Mediador con más de 20 años de experiencia.",
   url: "https://eduardobianco.com.ar",
@@ -131,7 +131,7 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Eduardo Julio Bianco",
-  jobTitle: "Abogado especialista en conflictos patrimoniales",
+  jobTitle: "Economista, Contador Público y Mediador — Especialista en conflictos patrimoniales",
   description: "Economista, Contador Público y Mediador con más de 20 años de experiencia en resolución de conflictos patrimoniales en Argentina.",
   url: "https://eduardobianco.com.ar",
   image: "https://eduardobianco.com.ar/og-image.png",
@@ -154,9 +154,8 @@ const personJsonLd = {
     "Conflictos entre socios",
     "Propiedad compartida",
   ],
-  sameAs: [],
   worksFor: {
-    "@type": "LegalService",
+    "@type": "ProfessionalService",
     name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
     url: "https://eduardobianco.com.ar",
   },
@@ -172,7 +171,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" />
         <link rel="dns-prefetch" href="https://d8j0ntlcm91z4.cloudfront.net" />
-        <link rel="preload" as="video" href="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4" />
+        <link rel="preload" as="video" href={VIDEO_URLS.hero} media="(min-width: 768px)" />
         {/* Cloudflare Turnstile — loaded only if site key is configured */}
         {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
           <Script

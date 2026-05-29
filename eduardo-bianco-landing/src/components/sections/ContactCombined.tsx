@@ -137,7 +137,7 @@ export default function ContactCombined() {
 
   return (
     <section
-      id="contact"
+      id="contact-form"
       ref={ref}
       role="region"
       aria-labelledby="contact-heading"
@@ -218,7 +218,7 @@ export default function ContactCombined() {
         </div>
 
         {/* Form */}
-        <div id="contact-form" className="max-w-2xl">
+        <div className="max-w-2xl">
           {formState === "success" ? (
             <m.div
               initial={{ opacity: 0, scale: 0.95 }}

@@ -85,7 +85,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
     name: s.h1,
     description: s.metaDescription,
     provider: {
-      "@type": "LegalService",
+      "@type": "ProfessionalService",
       name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
       url: "https://eduardobianco.com.ar",
       telephone: "+5491145779160",
@@ -135,6 +135,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
     ],
   };
 
+  // FAQPage schema — enables Google rich results (expandable FAQ snippets in SERP)
+  const faqSchema = s.faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: s.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  } : null;
+
   return (
     <div className="min-h-screen flex flex-col bg-black">
       <Navbar />
@@ -148,6 +162,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
+        {faqSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
+        )}
 
         <ServicePageHero
           h1={s.h1}
