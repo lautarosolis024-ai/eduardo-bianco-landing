@@ -32,8 +32,8 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <Globe className="w-5 h-5 text-white/60" />
-              <span className="text-white font-semibold">
-                Eduardo Bianco
+              <span className="text-white font-semibold tracking-wider">
+                EB CONSULTING
               </span>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
@@ -121,7 +121,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-white/5 flex flex-col gap-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-white/60 text-xs text-center md:text-left">
-              &copy; {currentYear} Eduardo Bianco &middot; {CREDENTIALS_DISPLAY}
+              &copy; {currentYear} EB Consulting &middot; {CREDENTIALS_DISPLAY}
             </p>
             <p className="text-white/60 text-xs text-center md:text-right">
               Protección de datos personales conforme a la Ley 25.326

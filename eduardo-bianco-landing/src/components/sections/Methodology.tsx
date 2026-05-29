@@ -47,8 +47,8 @@ export default function Methodology() {
 
         {/* Desktop: horizontal timeline */}
         <div className="hidden md:flex items-start justify-between gap-2 relative" role="list" aria-label="Metodología de 5 pasos">
-          {/* Connecting line */}
-          <div className="absolute top-6 left-[10%] right-[10%] h-px timeline-line" />
+          {/* Connecting line — only between first and last step */}
+          <div className="absolute top-6 h-px timeline-line" style={{ left: "10%", width: "80%" }} />
 
           {methodologySteps.map((step, i) => {
             const IconComponent = iconMap[step.icon] || Search;
@@ -61,7 +61,7 @@ export default function Methodology() {
                 className="flex flex-col items-center flex-1 relative z-10"
                 role="listitem"
               >
-                <div className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center mb-4 shadow-lg shadow-[rgba(212,135,90,0.15)]" aria-hidden="true">
+                <div className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center mb-4 shadow-lg shadow-[rgba(27,58,92,0.15)]" aria-hidden="true">
                   <IconComponent className="h-5 w-5" />
                 </div>
                 <span className="text-xs font-bold text-white/70 mb-2">Paso {step.step}</span>
@@ -78,7 +78,8 @@ export default function Methodology() {
 
         {/* Mobile: vertical timeline */}
         <div className="md:hidden space-y-0 relative" role="list" aria-label="Metodología de 5 pasos">
-          <div className="absolute left-6 top-0 bottom-0 w-px timeline-line-mobile" />
+          {/* Connecting line — stops at center of last step (not beyond) */}
+          <div className="absolute left-6 top-0 w-px timeline-line-mobile" style={{ height: "calc(100% - 2rem)" }} />
 
           {methodologySteps.map((step, i) => {
             const IconComponent = iconMap[step.icon] || Search;
@@ -91,7 +92,7 @@ export default function Methodology() {
                 className="flex gap-4 items-start relative pb-8 last:pb-0"
                 role="listitem"
               >
-                <div className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shrink-0 z-10 shadow-lg shadow-[rgba(212,135,90,0.15)]" aria-hidden="true">
+                <div className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shrink-0 z-10 shadow-lg shadow-[rgba(27,58,92,0.15)]" aria-hidden="true">
                   <IconComponent className="h-5 w-5" />
                 </div>
                 <div className="pt-1">

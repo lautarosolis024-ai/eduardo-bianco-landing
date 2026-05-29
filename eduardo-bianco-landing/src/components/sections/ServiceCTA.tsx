@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { m, useInView } from "framer-motion";
-import { ArrowRight, MessageCircle, Phone } from "lucide-react";
-import { getWhatsAppUrl, BUSINESS_STATS } from "@/lib/config";
+import { ArrowRight, MessageCircle, Calendar } from "lucide-react";
+import { getWhatsAppUrl, BUSINESS_STATS, CALENDLY_URL } from "@/lib/config";
 
 interface ServiceCTAProps {
   whatsappMessage: string;
@@ -30,7 +30,7 @@ export default function ServiceCTA({
         transition={{ duration: 0.8 }}
         className="max-w-2xl mx-auto liquid-glass rounded-3xl p-8 md:p-12 text-center relative"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(212,135,90,0.05)_0%,_transparent_60%)] pointer-events-none rounded-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(27,58,92,0.05)_0%,_transparent_60%)] pointer-events-none rounded-3xl" />
 
         <h2 id="service-cta-heading" className="text-3xl md:text-4xl lg:text-5xl text-white tracking-tight font-instrument mb-4">
           ¿Necesitás ayuda con{" "}
@@ -46,18 +46,20 @@ export default function ServiceCTA({
             href={getWhatsAppUrl(whatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3 bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-full px-8 py-4 text-base font-bold transition-all hover:scale-[1.02] active:scale-[0.98] cta-primary min-h-[52px]"
+            className="flex items-center justify-center gap-3 bg-[#1B3A5C] hover:bg-[#2A5A8A] text-white rounded-full px-8 py-4 text-base font-bold transition-all hover:scale-[1.02] active:scale-[0.98] cta-primary min-h-[52px]"
           >
             <MessageCircle className="w-5 h-5" />
             Consulta sin cargo
             <ArrowRight className="w-4 h-4" />
           </a>
           <a
-            href="/#contact-form"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors min-h-[44px]"
           >
-            <Phone className="w-4 h-4" />
-            Complete el formulario
+            <Calendar className="w-4 h-4" />
+            Agende su consulta
           </a>
         </div>
 

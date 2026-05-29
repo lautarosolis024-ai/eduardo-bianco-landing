@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getWhatsAppUrl, SITE_URL } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Página no encontrada | Eduardo Bianco",
+  title: "Página no encontrada | EB Consulting",
   robots: { index: false, follow: false },
 };
 
@@ -25,7 +25,7 @@ export default function NotFound() {
         <div className="flex flex-col gap-3">
           <a
             href={SITE_URL}
-            className="inline-flex items-center justify-center gap-2 bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-xl px-6 py-3 text-sm font-semibold transition-colors min-h-[44px]"
+            className="inline-flex items-center justify-center gap-2 bg-[#1B3A5C] hover:bg-[#2A5A8A] text-white rounded-xl px-6 py-3 text-sm font-semibold transition-colors min-h-[44px]"
           >
             Volver al inicio
           </a>

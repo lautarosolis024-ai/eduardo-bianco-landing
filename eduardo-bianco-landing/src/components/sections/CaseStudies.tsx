@@ -68,7 +68,7 @@ export default function CaseStudies() {
                     </p>
                     <p className="text-white/80 text-sm leading-relaxed">{cs.approach}</p>
                   </div>
-                  <div className="bg-[rgba(212,135,90,0.06)] border border-[rgba(212,135,90,0.12)] rounded-xl p-4 mt-4">
+                  <div className="bg-[rgba(27,58,92,0.06)] border border-[rgba(27,58,92,0.12)] rounded-xl p-4 mt-4">
                     <p className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-1">
                       Resultado
                     </p>

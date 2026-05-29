@@ -2,8 +2,8 @@
 
 import { m, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, MessageCircle, Phone } from "lucide-react";
-import { getWhatsAppUrl } from "@/lib/config";
+import { ArrowRight, MessageCircle, Calendar } from "lucide-react";
+import { getWhatsAppUrl, CALENDLY_URL } from "@/lib/config";
 
 interface ServicePageHeroProps {
   h1: string;
@@ -27,8 +27,8 @@ export default function ServicePageHero({
       className="min-h-[60vh] md:min-h-[70vh] overflow-hidden relative flex flex-col justify-center px-6 pt-24 pb-16 md:pt-32 md:pb-20"
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-[rgba(212,135,90,0.03)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,135,90,0.06)_0%,_transparent_50%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-[rgba(27,58,92,0.03)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(27,58,92,0.06)_0%,_transparent_50%)]" />
 
       <div className="max-w-4xl mx-auto relative z-10 text-center">
         <m.div
@@ -71,18 +71,20 @@ export default function ServicePageHero({
               href={getWhatsAppUrl(whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-full px-8 py-4 text-base font-bold transition-all hover:scale-[1.02] active:scale-[0.98] cta-primary min-h-[52px]"
+              className="flex items-center justify-center gap-3 bg-[#1B3A5C] hover:bg-[#2A5A8A] text-white rounded-full px-8 py-4 text-base font-bold transition-all hover:scale-[1.02] active:scale-[0.98] cta-primary min-h-[52px]"
             >
               <MessageCircle className="w-5 h-5" />
               Consulta sin cargo
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="/#contact-form"
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors min-h-[44px]"
             >
-              <Phone className="w-4 h-4" />
-              O complete el formulario
+              <Calendar className="w-4 h-4" />
+              Agende su consulta
             </a>
           </div>
         </m.div>

@@ -29,9 +29,9 @@
   --border: rgba(255,255,255,0.1);
   --input: rgba(255,255,255,0.1);
   --ring: rgba(255,255,255,0.3);
-  --accent: #D4875A;
-  --accent-hover: #c77a4f;
-  --accent-glow: rgba(212,135,90,0.2);
+  --accent: #1B3A5C;
+  --accent-hover: #2A5A8A;
+  --accent-glow: rgba(27,58,92,0.2);
 }
 
 @layer base {
@@ -151,7 +151,7 @@ section[id] {
    ============================================ */
 .cta-primary {
   box-shadow:
-    0 0 30px rgba(212, 135, 90, 0.25),
+    0 0 30px rgba(27, 58, 92, 0.35),
     0 4px 16px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
@@ -159,7 +159,7 @@ section[id] {
 
 .cta-primary:hover {
   box-shadow:
-    0 0 50px rgba(212, 135, 90, 0.4),
+    0 0 50px rgba(27, 58, 92, 0.5),
     0 6px 20px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
@@ -168,8 +168,8 @@ section[id] {
    COMPARISON TABLE — Visual hierarchy
    ============================================ */
 .comparison-we {
-  border-left: 3px solid rgba(212, 135, 90, 0.6);
-  background: rgba(212, 135, 90, 0.04);
+  border-left: 3px solid rgba(27, 58, 92, 0.6);
+  background: rgba(27, 58, 92, 0.08);
 }
 
 .comparison-they {
@@ -181,7 +181,7 @@ section[id] {
    TESTIMONIAL CARD — Trust accent
    ============================================ */
 .testimonial-card {
-  border-left: 3px solid rgba(212, 135, 90, 0.5);
+  border-left: 3px solid rgba(27, 58, 92, 0.5);
 }
 
 /* ============================================
@@ -190,18 +190,18 @@ section[id] {
 .timeline-line {
   background: linear-gradient(
     90deg,
-    rgba(212, 135, 90, 0.3),
+    rgba(27, 58, 92, 0.4),
     rgba(255, 255, 255, 0.2),
-    rgba(212, 135, 90, 0.3)
+    rgba(27, 58, 92, 0.4)
   );
 }
 
 .timeline-line-mobile {
   background: linear-gradient(
     180deg,
-    rgba(212, 135, 90, 0.3),
+    rgba(27, 58, 92, 0.4),
     rgba(255, 255, 255, 0.15),
-    rgba(212, 135, 90, 0.3)
+    rgba(27, 58, 92, 0.4)
   );
 }
 

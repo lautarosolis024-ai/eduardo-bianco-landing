@@ -42,7 +42,7 @@ export const servicesData: ServiceData[] = [
   // ============================================================
   {
     slug: "mediacion-patrimonial",
-    title: "Mediación Patrimonial en Buenos Aires | Eduardo Bianco",
+    title: "Mediación Patrimonial en Buenos Aires | EB Consulting",
     metaDescription:
       "Resolvé conflictos patrimoniales sin juicio. Mediación especializada en herencias, bienes gananciales y disputas entre socios. Consulta gratuita.",
     targetKeyword: "mediación patrimonial Buenos Aires",
@@ -121,7 +121,7 @@ export const servicesData: ServiceData[] = [
   // ============================================================
   {
     slug: "peritaje-economico",
-    title: "Peritaje Económico Patrimonial | Eduardo Bianco Abogado",
+    title: "Peritaje Económico Patrimonial | EB Consulting",
     metaDescription:
       "Peritaje económico para conflictos patrimoniales. Valuación de bienes, daños patrimoniales y peritaje contable. 500+ casos resueltos. Consulta gratis.",
     targetKeyword: "peritaje económico abogado CABA",
@@ -196,7 +196,7 @@ export const servicesData: ServiceData[] = [
   // ============================================================
   {
     slug: "herencia-disputada",
-    title: "Herencia Disputada en Argentina | Eduardo Bianco Abogado",
+    title: "Herencia Disputada en Argentina | EB Consulting",
     metaDescription:
       "Conflictos por herencia disputada. Resolvemos disputas entre herederos, aparición de herederos desconocidos, petición de herencia. Consulta gratuita.",
     targetKeyword: "herencia disputada abogado Argentina",
@@ -271,7 +271,7 @@ export const servicesData: ServiceData[] = [
   // ============================================================
   {
     slug: "sucesiones",
-    title: "Abogado de Sucesiones en Buenos Aires | Eduardo Bianco",
+    title: "Abogado de Sucesiones en Buenos Aires | EB Consulting",
     metaDescription:
       "Tramitamos sucesiones en CABA y Provincia de Buenos Aires. Declaratoria de herederos, partición de bienes, sucesiones complejas. Consulta gratuita.",
     targetKeyword: "abogado sucesiones Buenos Aires",
@@ -350,7 +350,7 @@ export const servicesData: ServiceData[] = [
   // ============================================================
   {
     slug: "planificacion-patrimonial",
-    title: "Planificación Patrimonial en Buenos Aires | Eduardo Bianco",
+    title: "Planificación Patrimonial en Buenos Aires | EB Consulting",
     metaDescription:
       "Protegé tu patrimonio familiar. Planificación sucesoria, fideicomisos, protección de activos y empresa familiar. Consulta gratuita.",
     targetKeyword: "planificación patrimonial abogado CABA",
@@ -425,7 +425,7 @@ export const servicesData: ServiceData[] = [
   // ============================================================
   {
     slug: "arbitraje-patrimonial",
-    title: "Arbitraje Patrimonial en Argentina | Eduardo Bianco Abogado",
+    title: "Arbitraje Patrimonial en Argentina | EB Consulting",
     metaDescription:
       "Resolvé conflictos patrimoniales por arbitraje. Proceso confidencial, rápido y vinculante. Especialista en conflictos entre socios y empresariales.",
     targetKeyword: "arbitraje patrimonial abogado Argentina",

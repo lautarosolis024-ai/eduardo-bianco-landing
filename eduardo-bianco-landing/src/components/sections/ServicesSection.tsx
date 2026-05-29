@@ -104,7 +104,7 @@ export default function ServicesSection() {
                   </a>
                   <Link
                     href={`/servicios/${service.slug}`}
-                    className="inline-flex items-center gap-1 text-[#D4875A] hover:text-[#c77a4f] text-sm font-medium transition-colors min-h-[44px] px-2"
+                    className="inline-flex items-center gap-1 text-[#1B3A5C] hover:text-[#2A5A8A] text-sm font-medium transition-colors min-h-[44px] px-2"
                   >
                     Ver más
                     <ArrowUpRight className="w-3.5 h-3.5" />

@@ -29,7 +29,7 @@ export function validateEnv() {
   if (!process.env.EMAIL_FROM && process.env.NODE_ENV === "production") {
     console.error(
       "[ENV] EMAIL_FROM is not set in production. Email sending will fail. " +
-      "Set it to a verified Resend sender (e.g. 'Eduardo Bianco <contacto@eduardobianco.com.ar>')."
+      "Set it to a verified Resend sender (e.g. 'EB Consulting <contacto@ebconsulting.com.ar>')."
     );
   }
 }

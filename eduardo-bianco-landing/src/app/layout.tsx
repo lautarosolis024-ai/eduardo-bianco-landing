@@ -28,7 +28,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Eduardo Bianco | Resolución de Conflictos Patrimoniales",
+  title: "EB Consulting | Resolución de Conflictos Patrimoniales",
   description:
     "Especialista en resolución de conflictos patrimoniales. Economista, Contador y Mediador con más de 20 años de experiencia. Herencias, socios, propiedades compartidas.",
   keywords: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     "peritaje",
     "arbitraje",
     "Argentina",
-    "Eduardo Bianco",
+    "EB Consulting",
   ],
   authors: [{ name: "Eduardo Julio Bianco" }],
   alternates: {
@@ -53,11 +53,11 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
-    title: "Eduardo Bianco | Resolución de Conflictos Patrimoniales",
+    title: "EB Consulting | Resolución de Conflictos Patrimoniales",
     description:
       "Especialista en resolución de conflictos patrimoniales. Economista, Contador y Mediador con más de 20 años de experiencia.",
     url: SITE_URL,
-    siteName: "Eduardo Bianco",
+    siteName: "EB Consulting",
     type: "website",
     locale: "es_AR",
     images: [
@@ -65,23 +65,23 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
+        alt: "EB Consulting — Resolución de Conflictos Patrimoniales",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Eduardo Bianco | Resolución de Conflictos Patrimoniales",
+    title: "EB Consulting | Resolución de Conflictos Patrimoniales",
     description:
       "Especialista en resolución de conflictos patrimoniales. Resultados en 30-120 días.",
-    images: [{ url: "/og-image.png", alt: "Eduardo Bianco — Resolución de Conflictos Patrimoniales" }],
+    images: [{ url: "/og-image.png", alt: "EB Consulting — Resolución de Conflictos Patrimoniales" }],
   },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
+  name: "EB Consulting — Resolución de Conflictos Patrimoniales",
   description: "Especialista en resolución de conflictos patrimoniales. Economista, Contador y Mediador con más de 20 años de experiencia.",
   url: SITE_URL,
   telephone: PHONE_SCHEMA,
@@ -156,7 +156,7 @@ const personJsonLd = {
   ],
   worksFor: {
     "@type": "ProfessionalService",
-    name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
+    name: "EB Consulting — Resolución de Conflictos Patrimoniales",
     url: SITE_URL,
   },
 };

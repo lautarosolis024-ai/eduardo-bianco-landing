@@ -13,7 +13,7 @@ export default function TestimonialsSection() {
   const reviewsJsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
+    name: "EB Consulting — Resolución de Conflictos Patrimoniales",
     review: testimonials.map((t) => ({
       "@type": "Review",
       author: {
@@ -59,7 +59,7 @@ export default function TestimonialsSection() {
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="flex items-center gap-0.5" aria-label="5 de 5 estrellas">
               {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} className="w-4 h-4 fill-[#D4875A] text-[#D4875A]" aria-hidden="true" />
+                <Star key={i} className="w-4 h-4 fill-[#1B3A5C] text-[#1B3A5C]" aria-hidden="true" />
               ))}
             </div>
             <span className="text-white/70 text-sm">Testimonios basados en casos reales</span>
@@ -83,7 +83,7 @@ export default function TestimonialsSection() {
               <Quote className="w-8 h-8 text-white/20 mb-4 shrink-0" aria-hidden="true" />
               <div className="flex items-center gap-0.5 mb-3" aria-label="5 de 5 estrellas">
                 {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} className="w-3.5 h-3.5 fill-[#D4875A] text-[#D4875A]" aria-hidden="true" />
+                  <Star key={s} className="w-3.5 h-3.5 fill-[#1B3A5C] text-[#1B3A5C]" aria-hidden="true" />
                 ))}
               </div>
               <blockquote className="text-white/80 text-sm leading-relaxed flex-1 mb-6">

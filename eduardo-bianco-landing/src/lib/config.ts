@@ -30,7 +30,7 @@ export function getWhatsAppUrl(message?: string): string {
 }
 
 // Email
-export const CONTACT_EMAIL = "eduardo@bianco.com.ar";
+export const CONTACT_EMAIL = "ejuliobianco@gmail.com";
 
 // Office
 export const OFFICE_LOCATION = "Buenos Aires, Argentina";
@@ -55,6 +55,9 @@ export const PRIVACY_UPDATE_DATE = "mayo 2026" as const;
 
 /** Shared localStorage key for cookie consent — prevents duplication between CookieConsent and AnalyticsConsent. */
 export const COOKIE_CONSENT_KEY = "eb-cookie-consent" as const;
+
+/** Calendly scheduling URL */
+export const CALENDLY_URL = "https://calendly.com/ebconsulting";
 
 // Video CDN URLs (single source of truth)
 export const VIDEO_URLS = {

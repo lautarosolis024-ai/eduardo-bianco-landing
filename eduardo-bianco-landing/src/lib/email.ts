@@ -16,12 +16,12 @@ function getResend(): Resend {
 
 // EMAIL_FROM must be set to a verified sender in production.
 // onboarding@resend.dev ONLY delivers to the Resend account owner — NOT to the recipient.
-// In production, set EMAIL_FROM env var to a verified domain address (e.g. "Eduardo Bianco <contacto@eduardobianco.com.ar>").
+// In production, set EMAIL_FROM env var to a verified domain address (e.g. "EB Consulting <contacto@ebconsulting.com.ar>").
 // In development/demo, we fall back to onboarding@resend.dev which works for account-owner testing only.
 const EMAIL_FROM = process.env.EMAIL_FROM ||
   (process.env.NODE_ENV === "production"
     ? undefined  // Will fail loudly in production if not set
-    : "Eduardo Bianco <onboarding@resend.dev>");
+    : "EB Consulting <onboarding@resend.dev>");
 const EMAIL_TO = process.env.EMAIL_TO || (process.env.NODE_ENV === "production" ? undefined : "ejuliobianco@gmail.com");
 
 export async function sendContactEmail(data: ContactFormValues): Promise<{ success: boolean; message: string }> {
@@ -58,7 +58,7 @@ export async function sendContactEmail(data: ContactFormValues): Promise<{ succe
 
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-      <h2 style="color: #1A2330; border-bottom: 2px solid #D4875A; padding-bottom: 10px;">
+      <h2 style="color: #1A2330; border-bottom: 2px solid #1B3A5C; padding-bottom: 10px;">
         Nueva consulta desde la web
       </h2>
       <table style="width: 100%; border-collapse: collapse;">
@@ -85,7 +85,7 @@ export async function sendContactEmail(data: ContactFormValues): Promise<{ succe
       </p>
       <hr style="border: none; border-top: 1px solid #E8E0DA; margin: 20px 0;" />
       <p style="color: #908880; font-size: 12px;">
-        Este email fue enviado desde el formulario de contacto de eduardobianco.com.ar
+        Este email fue enviado desde el formulario de contacto de EB Consulting
       </p>
     </div>
   `;

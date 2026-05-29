@@ -131,7 +131,7 @@ export default function ContactCombined() {
   };
 
   const inputClasses =
-    "w-full bg-white/[0.07] border border-white/15 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4875A]/40 focus:ring-1 focus:ring-[#D4875A]/20 transition-colors text-sm";
+    "w-full bg-white/[0.07] border border-white/15 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:outline-none focus:border-[#1B3A5C]/40 focus:ring-1 focus:ring-[#1B3A5C]/20 transition-colors text-sm";
   const labelClasses = "block text-white/70 text-sm font-medium mb-2";
   const errorClasses = "text-red-400 text-xs mt-1";
 
@@ -143,7 +143,7 @@ export default function ContactCombined() {
       aria-labelledby="contact-heading"
       className="bg-black py-20 md:py-32 px-6 overflow-hidden relative"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(212,135,90,0.04)_0%,_transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(27,58,92,0.04)_0%,_transparent_60%)] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative">
         {/* Heading */}
@@ -376,13 +376,13 @@ export default function ContactCombined() {
                     type="checkbox"
                     checked={formData.privacyConsent}
                     onChange={(e) => handleChange("privacyConsent", e.target.checked)}
-                    className="mt-0.5 w-4 h-4 rounded border-white/30 bg-white/[0.07] text-[#D4875A] focus:ring-[#D4875A]/40 focus:ring-offset-0 accent-[#D4875A] shrink-0"
+                    className="mt-0.5 w-4 h-4 rounded border-white/30 bg-white/[0.07] text-[#1B3A5C] focus:ring-[#1B3A5C]/40 focus:ring-offset-0 accent-[#1B3A5C] shrink-0"
                     required
                     aria-required="true"
                   />
                   <span className="text-white/60 text-xs leading-relaxed group-hover:text-white/80 transition-colors">
                     Acepto el tratamiento de mis datos personales conforme a la Ley 25.326.{" "}
-                    <a href="#privacy" className="text-[#D4875A] hover:text-[#c77a4f] underline underline-offset-2 transition-colors">
+                    <a href="#privacy" className="text-[#1B3A5C] hover:text-[#2A5A8A] underline underline-offset-2 transition-colors">
                       Ver política de privacidad
                     </a>
                   </span>
@@ -400,7 +400,7 @@ export default function ContactCombined() {
               <button
                 type="submit"
                 disabled={formState === "loading"}
-                className="w-full bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-xl py-4 text-base font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[52px] cta-primary"
+                className="w-full bg-[#1B3A5C] hover:bg-[#2A5A8A] text-white rounded-xl py-4 text-base font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[52px] cta-primary"
               >
                 {formState === "loading" ? (
                   <>

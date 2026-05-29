@@ -67,7 +67,7 @@ export default function CookieConsent() {
                   ref={acceptRef}
                   type="button"
                   onClick={accept}
-                  className="bg-[#D4875A] hover:bg-[#c77a4f] text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full transition-colors min-h-[44px]"
+                  className="bg-[#1B3A5C] hover:bg-[#2A5A8A] text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full transition-colors min-h-[44px]"
                 >
                   Aceptar
                 </button>

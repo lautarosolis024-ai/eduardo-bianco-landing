@@ -34,7 +34,7 @@ export async function generateMetadata({
     description: service.metaDescription,
     keywords: [
       service.targetKeyword,
-      "Eduardo Bianco",
+      "EB Consulting",
       "conflictos patrimoniales",
       "Buenos Aires",
       "Argentina",
@@ -46,7 +46,7 @@ export async function generateMetadata({
       title: service.title,
       description: service.metaDescription,
       url: service.canonicalUrl,
-      siteName: "Eduardo Bianco",
+      siteName: "EB Consulting",
       type: "website",
       locale: "es_AR",
       images: [
@@ -87,7 +87,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
     description: s.metaDescription,
     provider: {
       "@type": "ProfessionalService",
-      name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
+      name: "EB Consulting — Resolución de Conflictos Patrimoniales",
       url: SITE_URL,
       telephone: PHONE_SCHEMA,
       address: {

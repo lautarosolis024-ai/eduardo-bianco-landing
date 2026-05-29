@@ -94,7 +94,7 @@ export default function WhyChooseUs() {
                   {/* We do */}
                   <div className="liquid-glass rounded-xl p-4 md:p-5 comparison-we">
                     <div className="flex items-center gap-2 mb-2">
-                      <IconComp className="w-4 h-4 text-[#D4875A]" />
+                      <IconComp className="w-4 h-4 text-[#1B3A5C]" />
                       <span className="text-white/60 text-[11px] font-bold uppercase tracking-widest">Nosotros</span>
                     </div>
                     <p className="text-white text-sm font-medium">{comp.we}</p>

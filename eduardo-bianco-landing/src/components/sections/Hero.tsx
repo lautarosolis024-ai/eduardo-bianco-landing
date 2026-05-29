@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, useEffect, useCallback } from "react";
-import { ArrowRight, MessageCircle, Phone, Globe, Shield } from "lucide-react";
-import { getWhatsAppUrl, VIDEO_URLS, PHONE_TEL, CREDENTIALS_DISPLAY, BUSINESS_STATS } from "@/lib/config";
+import { ArrowRight, MessageCircle, Phone, Globe, Shield, Calendar } from "lucide-react";
+import { getWhatsAppUrl, VIDEO_URLS, PHONE_TEL, CREDENTIALS_DISPLAY, BUSINESS_STATS, CALENDLY_URL } from "@/lib/config";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 function animateOpacity(
@@ -111,7 +111,7 @@ export default function Hero() {
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-black/50" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(212,135,90,0.05)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(27,58,92,0.08)]" />
 
       {/* Hero content */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-10 text-center -translate-y-[5%] md:-translate-y-[10%]">
@@ -163,18 +163,20 @@ export default function Hero() {
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3 bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-full px-8 py-4 text-base font-bold transition-all hover:scale-[1.02] active:scale-[0.98] cta-primary min-h-[52px]"
+            className="flex items-center justify-center gap-3 bg-[#1B3A5C] hover:bg-[#2A5A8A] text-white rounded-full px-8 py-4 text-base font-bold transition-all hover:scale-[1.02] active:scale-[0.98] cta-primary min-h-[52px]"
           >
             <MessageCircle className="w-5 h-5" />
             Consulta sin cargo
             <ArrowRight className="w-4 h-4" />
           </a>
           <a
-            href="#contact-form"
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors min-h-[44px]"
           >
-            <Phone className="w-4 h-4" />
-            O complete el formulario
+            <Calendar className="w-4 h-4" />
+            Agende su consulta
           </a>
         </div>
 
@@ -186,7 +188,7 @@ export default function Hero() {
         {/* Verified trust signals — no fake ratings */}
         <div className="mt-3 flex flex-col items-center gap-2">
           <div className="flex items-center gap-2">
-            <Shield className="w-3.5 h-3.5 text-[#D4875A]" aria-hidden="true" />
+            <Shield className="w-3.5 h-3.5 text-[#1B3A5C]" aria-hidden="true" />
             <p className="text-white/70 text-xs font-medium">
               {BUSINESS_STATS.casesResolved} conflictos resueltos · {BUSINESS_STATS.yearsExperience} años de experiencia
             </p>
