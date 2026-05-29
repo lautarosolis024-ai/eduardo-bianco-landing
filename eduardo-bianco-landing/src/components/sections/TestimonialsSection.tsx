@@ -78,7 +78,7 @@ export default function TestimonialsSection() {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.15 * i }}
-              className="liquid-glass rounded-2xl p-6 sm:p-8 flex flex-col"
+              className="liquid-glass rounded-2xl p-6 sm:p-8 flex flex-col testimonial-card"
             >
               <Quote className="w-8 h-8 text-white/20 mb-4 shrink-0" aria-hidden="true" />
               <div className="flex items-center gap-0.5 mb-3" aria-label="5 de 5 estrellas">

@@ -99,20 +99,20 @@ export default function WhyChooseUs() {
                   className="grid grid-cols-2 gap-4"
                 >
                   {/* We do */}
-                  <div className="liquid-glass rounded-xl p-4 md:p-5 border-l-2 border-white/30">
+                  <div className="liquid-glass rounded-xl p-4 md:p-5 comparison-we">
                     <div className="flex items-center gap-2 mb-2">
-                      <IconComp className="w-4 h-4 text-white/70" />
+                      <IconComp className="w-4 h-4 text-[#D4875A]" />
                       <span className="text-white/60 text-[11px] font-bold uppercase tracking-widest">Nosotros</span>
                     </div>
                     <p className="text-white text-sm font-medium">{comp.we}</p>
                   </div>
                   {/* They do */}
-                  <div className="rounded-xl p-4 md:p-5 bg-white/[0.02] border-l-2 border-white/10">
+                  <div className="rounded-xl p-4 md:p-5 bg-white/[0.02] comparison-they">
                     <div className="flex items-center gap-2 mb-2">
-                      <X className="w-4 h-4 text-white/60" />
+                      <X className="w-4 h-4 text-white/30" />
                       <span className="text-white/60 text-[11px] font-bold uppercase tracking-widest">Litigio</span>
                     </div>
-                    <p className="text-white/70 text-sm">{comp.they}</p>
+                    <p className="text-white/50 text-sm">{comp.they}</p>
                   </div>
                 </m.div>
               );

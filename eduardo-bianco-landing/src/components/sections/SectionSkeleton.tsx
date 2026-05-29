@@ -8,8 +8,8 @@ export default function SectionSkeleton() {
     <div className="bg-black py-20 md:py-32 px-6" aria-busy="true" aria-label="Cargando contenido">
       <div className="max-w-6xl mx-auto">
         <div className="h-10 w-64 bg-white/5 rounded-lg mb-8 animate-pulse" />
-        <div className="h-6 w-96 bg-white/5 rounded-lg mb-4 animate-pulse" />
-        <div className="h-6 w-72 bg-white/5 rounded-lg animate-pulse" />
+        <div className="h-6 w-96 bg-white/[0.03] rounded-lg mb-4 animate-pulse" />
+        <div className="h-6 w-72 bg-white/[0.03] rounded-lg animate-pulse" />
       </div>
     </div>
   );

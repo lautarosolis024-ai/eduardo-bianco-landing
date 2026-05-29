@@ -130,7 +130,7 @@ export default function Hero() {
         </div>
 
         {/* Main headline — "conflictos" is brightest (the key word) */}
-        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-white tracking-tight font-instrument mb-4">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-white tracking-tight font-instrument mb-6 leading-[1.1]">
           Resolvemos{" "}
           <em className="italic text-white">conflictos</em>
         </h1>
@@ -147,7 +147,7 @@ export default function Hero() {
 
         {/* Audience-segmented quick-select pills */}
         <div className="flex flex-col items-center mb-8">
-          <p className="text-white/60 text-xs mb-3">¿Qué conflicto tiene?</p>
+          <p className="text-white/70 text-xs mb-4">¿Qué conflicto tiene?</p>
           <div className="flex flex-wrap items-center justify-center gap-2">
             {conflictTypes.map((ct) => (
               <a
@@ -165,12 +165,12 @@ export default function Hero() {
         </div>
 
         {/* Dual CTA — WhatsApp (primary) + Form (secondary) */}
-        <div className="max-w-md w-full mb-6 flex flex-col gap-3">
+        <div className="max-w-md w-full mb-8 flex flex-col gap-3">
           <a
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3 bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-full px-8 py-4 text-base font-bold transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_30px_rgba(212,135,90,0.2)] hover:shadow-[0_0_40px_rgba(212,135,90,0.35)] min-h-[52px]"
+            className="flex items-center justify-center gap-3 bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-full px-8 py-4 text-base font-bold transition-all hover:scale-[1.02] active:scale-[0.98] cta-primary min-h-[52px]"
           >
             <MessageCircle className="w-5 h-5" />
             Consulta sin cargo

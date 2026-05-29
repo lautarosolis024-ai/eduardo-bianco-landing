@@ -91,7 +91,7 @@ export default function AboutSection() {
         >
           {stats.map((stat) => (
             <div key={stat.label} className="liquid-glass rounded-2xl p-6">
-              <p className="text-3xl md:text-4xl font-instrument text-white mb-2">
+              <p className="text-3xl md:text-4xl font-instrument text-white mb-2" style={{ textShadow: '0 0 20px rgba(212,135,90,0.15)' }}>
                 {stat.value}
               </p>
               <p className="text-white/60 text-xs tracking-wider uppercase">

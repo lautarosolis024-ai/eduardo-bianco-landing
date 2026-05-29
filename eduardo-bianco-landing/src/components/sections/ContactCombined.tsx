@@ -76,7 +76,7 @@ export default function ContactCombined() {
   };
 
   const inputClasses =
-    "w-full bg-white/[0.07] border border-white/15 rounded-xl px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-colors text-sm";
+    "w-full bg-white/[0.07] border border-white/15 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4875A]/40 focus:ring-1 focus:ring-[#D4875A]/20 transition-colors text-sm";
   const labelClasses = "block text-white/70 text-sm font-medium mb-2";
   const errorClasses = "text-red-400 text-xs mt-1";
 
@@ -86,9 +86,11 @@ export default function ContactCombined() {
       ref={ref}
       role="region"
       aria-labelledby="contact-heading"
-      className="bg-black py-20 md:py-32 px-6 overflow-hidden"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden relative"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(212,135,90,0.04)_0%,_transparent_60%)] pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto relative">
         {/* Heading */}
         <m.h2
           id="contact-heading"
@@ -315,7 +317,7 @@ export default function ContactCombined() {
               <button
                 type="submit"
                 disabled={formState === "loading"}
-                className="w-full bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-xl py-4 text-base font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[52px] shadow-[0_0_20px_rgba(212,135,90,0.15)]"
+                className="w-full bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-xl py-4 text-base font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[52px] cta-primary"
               >
                 {formState === "loading" ? (
                   <>
