@@ -22,10 +22,32 @@ export default function Navbar() {
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
     setServicesOpen(false);
+  }, []);
+
+  // Desktop dropdown: delayed close to allow mouse travel from button → panel
+  const scheduleClose = useCallback(() => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setServicesOpen(false);
+    }, 150);
+  }, []);
+
+  const cancelClose = useCallback(() => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  }, []);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
   }, []);
 
   // Close services dropdown on outside click
@@ -130,10 +152,18 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-6 xl:gap-8">
           {navLinks.map((link) =>
             link.href === "#services" ? (
-              <div key="services-dropdown" ref={servicesRef} className="relative">
+              <div
+                key="services-dropdown"
+                ref={servicesRef}
+                className="relative"
+                onMouseEnter={() => {
+                  cancelClose();
+                  setServicesOpen(true);
+                }}
+                onMouseLeave={scheduleClose}
+              >
                 <button
-                  onClick={() => setServicesOpen(!servicesOpen)}
-                  onMouseEnter={() => setServicesOpen(true)}
+                  onClick={() => setServicesOpen((prev) => !prev)}
                   className={`flex items-center gap-1 text-sm font-medium transition-colors py-2 ${
                     activeSection === "services"
                       ? "text-white"
@@ -141,6 +171,7 @@ export default function Navbar() {
                   }`}
                   aria-expanded={servicesOpen}
                   aria-haspopup="true"
+                  aria-controls="services-dropdown-menu"
                 >
                   Servicios
                   <ChevronDown
@@ -152,19 +183,21 @@ export default function Navbar() {
                 <AnimatePresence>
                   {servicesOpen && (
                     <m.div
+                      id="services-dropdown-menu"
+                      role="menu"
                       initial={{ opacity: 0, y: -5 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -5 }}
                       transition={{ duration: 0.15 }}
-                      onMouseLeave={() => setServicesOpen(false)}
-                      className="absolute top-full left-0 mt-2 liquid-glass rounded-xl p-2 min-w-[240px]"
+                      className="absolute top-full right-0 lg:left-auto mt-1 liquid-glass rounded-xl p-2 min-w-[240px]"
                     >
                       {servicesData.map((service) => (
                         <Link
                           key={service.slug}
                           href={`/servicios/${service.slug}`}
                           onClick={() => setServicesOpen(false)}
-                          className="block px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg text-sm transition-colors"
+                          role="menuitem"
+                          className="block px-4 py-2.5 text-white/80 hover:text-white hover:bg-white/5 rounded-lg text-sm transition-colors focus:outline-none focus:bg-white/5 focus:text-white"
                         >
                           {service.breadcrumbName}
                         </Link>
@@ -231,37 +264,28 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             className="lg:hidden liquid-glass rounded-2xl max-w-5xl mx-auto mt-2 p-4 flex flex-col gap-1"
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={closeMenu}
-                className={`text-base font-medium transition-colors py-2 px-2 ${
-                  activeSection === link.href.slice(1)
-                    ? "text-white"
-                    : "text-white/80 hover:text-white"
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
-
-            {/* Services sub-menu in mobile */}
-            <div className="pl-4 border-l border-white/10 ml-2">
-              <p className="text-white/50 text-xs uppercase tracking-wider py-2 px-2">
-                Servicios
-              </p>
-              {servicesData.map((service) => (
-                <Link
-                  key={service.slug}
-                  href={`/servicios/${service.slug}`}
+            {navLinks
+              .filter((link) => link.href !== "#services")
+              .map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
                   onClick={closeMenu}
-                  className="block text-white/70 hover:text-white text-sm font-medium transition-colors py-2 px-2"
+                  className={`text-base font-medium transition-colors py-2 px-2 ${
+                    activeSection === link.href.slice(1)
+                      ? "text-white"
+                      : "text-white/80 hover:text-white"
+                  }`}
                 >
-                  {service.breadcrumbName}
-                </Link>
+                  {link.label}
+                </a>
               ))}
-            </div>
+
+            {/* Services section — expandable accordion in mobile */}
+            <MobileServicesAccordion
+              activeSection={activeSection}
+              onClose={closeMenu}
+            />
 
             <a
               href={getWhatsAppUrl()}
@@ -276,5 +300,74 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </nav>
+  );
+}
+
+/** Mobile-only accordion for services — replaces the old flat list */
+function MobileServicesAccordion({
+  activeSection,
+  onClose,
+}: {
+  activeSection: string;
+  onClose: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div className="border-l border-white/10 ml-2 pl-4">
+      <button
+        onClick={() => setExpanded((prev) => !prev)}
+        className={`flex items-center justify-between w-full text-base font-medium transition-colors py-2 px-2 ${
+          activeSection === "services"
+            ? "text-white"
+            : "text-white/80 hover:text-white"
+        }`}
+        aria-expanded={expanded}
+        aria-controls="mobile-services-list"
+      >
+        Servicios
+        <ChevronDown
+          className={`w-4 h-4 transition-transform duration-200 ${
+            expanded ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <m.div
+            id="mobile-services-list"
+            role="menu"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            {servicesData.map((service) => (
+              <Link
+                key={service.slug}
+                href={`/servicios/${service.slug}`}
+                onClick={onClose}
+                role="menuitem"
+                className="block text-white/70 hover:text-white text-sm font-medium transition-colors py-2 px-2 focus:outline-none focus:text-white"
+              >
+                {service.breadcrumbName}
+              </Link>
+            ))}
+            <a
+              href="#services"
+              onClick={(e) => {
+                e.preventDefault();
+                onClose();
+                document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="block text-white/50 hover:text-white/80 text-xs font-medium transition-colors py-2 px-2"
+            >
+              Ver todos los servicios →
+            </a>
+          </m.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
