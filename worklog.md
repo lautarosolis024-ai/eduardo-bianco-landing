@@ -82,3 +82,51 @@ Stage Summary:
 - 17 P1 issues fixed (security, a11y, SEO, functionality, performance)
 - 27 P2 + 18 P3 issues documented for next sprint
 - TypeScript compiles clean (tsc --noEmit passes)
+
+---
+Task ID: build-p2p3
+Agent: main
+Task: /build — Fix all remaining P2/P3 issues from comprehensive review
+
+Work Log:
+- Added SITE_URL, CREDENTIALS_DISPLAY, PROFESSIONAL_TITLE, PRIVACY_UPDATE_DATE, COOKIE_CONSENT_KEY to config.ts
+- Replaced 15+ hard-coded "eduardobianco.com.ar" strings across 5 files with SITE_URL import
+- Added type="button" to 11 non-submit buttons across 7 components (CookieConsent, ExitIntentPopup, FAQSection, ServiceFAQ, ScrollToTop, Navbar, MobileServicesAccordion)
+- Added skip-to-content link in page.tsx, removed duplicate from Hero.tsx (WCAG 2.4.1)
+- Added id="main-content" to <main> element + aria-label
+- Added role="alert" to error.tsx and not-found.tsx
+- Added aria-busy + role="status" to loading.tsx
+- Added role="region" + aria-labelledby to Hero, ServiceCTA, ServicePageContent, ServicePageHero
+- Created useBodyScrollLock hook, applied to Navbar mobile, ExitIntentPopup, CookieConsent
+- Added focus trap + return focus to ExitIntentPopup
+- Added auto-focus to CookieConsent accept button
+- Wrapped Footer, WhatsAppButton, ScrollToTop, CookieConsent, ExitIntentPopup in Suspense
+- Added aria-live="polite" to contact form status area
+- Added title to not-found page metadata
+- Fixed not-found.tsx to use getWhatsAppUrl from config
+- Fixed error.tsx: aria-hidden emoji, sr-only "Error" text, safer error logging
+- Added HMAC fallback guard (throw in production if RESEND_API_KEY missing)
+- Stripped newlines from email subject (header injection prevention)
+- Made Testimonial.type a union type ("Herencia" | "Socios" | "Propiedad")
+- Deduplicated COOKIE_CONSENT_KEY between CookieConsent and AnalyticsConsent via config
+- Extracted FAQ data to @/data/faqs.ts with stable IDs
+- Extracted privacy data to @/data/privacy-points.ts with stable IDs
+- Extracted comparisons to @/data/why-choose-us.ts with stable IDs
+- Used CREDENTIALS_DISPLAY, BUSINESS_STATS, PRIVACY_UPDATE_DATE in Hero, Footer, ServiceCTA, PrivacyPolicySection
+- Added aria-label to Footer nav elements ("Navegación principal", "Servicios", "Enlaces legales")
+- Fixed TestimonialsSection JSON-LD @type from LegalService to ProfessionalService
+- Expanded FeaturedVideoSection sr-only heading
+- Added aria-label to "Conocer más" link
+- Added CSP comment explaining unsafe-inline/unsafe-eval requirement
+- Used stable keys (faq.id, t.name, comp.id, cred.text) instead of array indices
+- Removed unused ContactApiResponse interface
+- Replaced hard-coded phone in service page JSON-LD with PHONE_SCHEMA
+- Committed (4baff25), pushed to GitHub for auto-deploy
+
+Stage Summary:
+- Commit: 4baff25 (37 files changed, 369 insertions, 153 deletions)
+- 25 P2 issues fixed (a11y, security, config, scroll lock, focus management, Suspense, SEO)
+- 20 P3 issues fixed (data extraction, stable keys, schema, dedup, comments)
+- 3 new files: data/faqs.ts, data/privacy-points.ts, hooks/useBodyScrollLock.ts
+- TypeScript compiles clean (tsc --noEmit passes)
+- Deployed via GitHub auto-deploy to Vercel
