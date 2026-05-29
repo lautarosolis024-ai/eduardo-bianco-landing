@@ -82,7 +82,7 @@ export default function Credentials() {
                 Economista &middot; Contador &middot; Mediador
               </p>
               <ul className="space-y-3">
-                {credentials.map((cred, i) => {
+                {credentials.map((cred, _i) => {
                   const IconComp = cred.icon;
                   return (
                     <li key={cred.text} className="flex items-start gap-3">

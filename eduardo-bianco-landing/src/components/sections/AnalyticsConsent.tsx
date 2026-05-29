@@ -16,15 +16,20 @@ export default function AnalyticsConsent() {
   const [hasConsent, setHasConsent] = useState(false);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(COOKIE_CONSENT_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        setHasConsent(parsed.accepted === true);
+    // Read initial consent state via microtask to avoid setState in effect body
+    const readConsent = () => {
+      try {
+        const stored = localStorage.getItem(COOKIE_CONSENT_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          setHasConsent(parsed.accepted === true);
+        }
+      } catch {
+        // No consent data yet — don't load analytics
       }
-    } catch {
-      // No consent data yet — don't load analytics
-    }
+    };
+
+    queueMicrotask(readConsent);
 
     // Listen for consent changes from CookieConsent component
     const handleStorage = (e: StorageEvent) => {

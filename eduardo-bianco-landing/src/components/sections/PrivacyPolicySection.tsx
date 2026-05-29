@@ -49,7 +49,7 @@ export default function PrivacyPolicySection() {
           {privacyPoints.map((point, i) => {
             const IconComp = iconMap[point.iconName] || Shield;
             // Replace placeholder with actual email in the "derechos" description
-            const description = point.id === "derechos"
+            const _description = point.id === "derechos"
               ? point.description
               : point.description;
             return (

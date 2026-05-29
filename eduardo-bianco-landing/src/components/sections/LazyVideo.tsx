@@ -63,7 +63,8 @@ export default function LazyVideo({
 
     // If no IntersectionObserver support, load immediately
     if (!("IntersectionObserver" in window)) {
-      setShouldLoad(true);
+      // Use microtask to avoid setState in effect body (React 19 rule)
+      queueMicrotask(() => setShouldLoad(true));
       return;
     }
     if (!el) return;

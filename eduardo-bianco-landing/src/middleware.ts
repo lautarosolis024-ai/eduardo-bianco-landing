@@ -6,7 +6,7 @@ import type { NextRequest } from "next/server";
  * These headers protect against clickjacking, MIME sniffing,
  * XSS, and enforce HTTPS.
  */
-export function middleware(request: NextRequest) {
+export function middleware(_request: NextRequest) {
   const response = NextResponse.next();
 
   // Prevent clickjacking — only allow framing from same origin
