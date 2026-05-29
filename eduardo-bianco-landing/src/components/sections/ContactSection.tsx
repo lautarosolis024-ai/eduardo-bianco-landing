@@ -61,7 +61,7 @@ export default function ContactSection() {
             <p className="text-white/70 text-sm">
               Respuesta inmediata en horario hábil
             </p>
-            <ArrowUpRight className="w-4 h-4 text-white/40 mt-4 group-hover:text-white transition-colors" />
+            <ArrowUpRight className="w-4 h-4 text-white/60 mt-4 group-hover:text-white transition-colors" />
           </motion.a>
 
           <motion.a
@@ -80,7 +80,7 @@ export default function ContactSection() {
             <p className="text-white/70 text-sm">
               Respuesta en 24 horas hábiles
             </p>
-            <ArrowUpRight className="w-4 h-4 text-white/40 mt-4 group-hover:text-white transition-colors" />
+            <ArrowUpRight className="w-4 h-4 text-white/60 mt-4 group-hover:text-white transition-colors" />
           </motion.a>
 
           <motion.div

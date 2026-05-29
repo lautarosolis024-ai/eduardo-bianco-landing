@@ -98,7 +98,7 @@ export default function PrivacyPolicySection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-12 text-center text-white/40 text-xs leading-relaxed max-w-2xl mx-auto"
+          className="mt-12 text-center text-white/60 text-xs leading-relaxed max-w-2xl mx-auto"
         >
           {`Responsable del tratamiento: Eduardo Julio Bianco — CUIT/CUIL a
           solicitud — Domicilio: Buenos Aires, Argentina. Para consultas sobre

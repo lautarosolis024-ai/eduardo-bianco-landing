@@ -109,7 +109,7 @@ export default function WhyChooseUs() {
                   {/* They do */}
                   <div className="rounded-xl p-4 md:p-5 bg-white/[0.02] border-l-2 border-white/10">
                     <div className="flex items-center gap-2 mb-2">
-                      <X className="w-4 h-4 text-white/40" />
+                      <X className="w-4 h-4 text-white/60" />
                       <span className="text-white/60 text-[11px] font-bold uppercase tracking-widest">Litigio</span>
                     </div>
                     <p className="text-white/70 text-sm">{comp.they}</p>

@@ -15,12 +15,15 @@ function getResend(): Resend {
   return _resend;
 }
 
-const EMAIL_FROM = process.env.EMAIL_FROM || "Eduardo Bianco <onboarding@resend.dev>";
+// EMAIL_FROM must be set to a verified sender in production.
+// onboarding@resend.dev ONLY delivers to the Resend account owner — NOT to the recipient.
+// In production, set EMAIL_FROM env var to a verified domain address (e.g. "Eduardo Bianco <contacto@eduardobianco.com.ar>").
+// In development/demo, we fall back to onboarding@resend.dev which works for account-owner testing only.
+const EMAIL_FROM = process.env.EMAIL_FROM ||
+  (process.env.NODE_ENV === "production"
+    ? undefined  // Will fail loudly in production if not set
+    : "Eduardo Bianco <onboarding@resend.dev>");
 const EMAIL_TO = process.env.EMAIL_TO || "ejuliobianco@gmail.com";
-
-// TODO: Replace EMAIL_FROM with a verified domain sender (e.g. contacto@eduardobianco.com.ar)
-// The onboarding@resend.dev address only delivers to the account owner — not to arbitrary inboxes.
-// Once Resend domain is verified, set EMAIL_FROM env var to the real address.
 
 interface EmailPayload {
   name: string;
@@ -31,6 +34,12 @@ interface EmailPayload {
 }
 
 export async function sendContactEmail(data: EmailPayload): Promise<{ success: boolean; message: string }> {
+  // In production, EMAIL_FROM must be explicitly set to a verified domain sender
+  if (!EMAIL_FROM) {
+    console.error("[EMAIL] EMAIL_FROM is not set. In production, set this to a verified Resend sender address.");
+    return { success: false, message: "El servicio de email no está configurado. Por favor, contáctese por WhatsApp." };
+  }
+
   const sanitized = {
     name: sanitizeInput(data.name),
     phone: sanitizeInput(data.phone),

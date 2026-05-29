@@ -102,7 +102,7 @@ export default function Footer() {
           <p className="text-white/60 text-xs text-center md:text-left">
             &copy; {currentYear} Eduardo Bianco &middot; Economista &middot; Contador Público &middot; Mediador
           </p>
-          <p className="text-white/50 text-xs text-center md:text-right">
+          <p className="text-white/60 text-xs text-center md:text-right">
             Protección de datos personales conforme a la Ley 25.326
           </p>
         </div>

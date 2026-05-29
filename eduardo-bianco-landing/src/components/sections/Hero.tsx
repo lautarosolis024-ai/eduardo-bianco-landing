@@ -171,7 +171,7 @@ export default function Hero() {
         </p>
 
         {/* Urgency badge */}
-        <p className="mt-3 text-white/50 text-xs">
+        <p className="mt-3 text-white/60 text-xs">
           Consulta gratuita · Cupos limitados mensuales
         </p>
 

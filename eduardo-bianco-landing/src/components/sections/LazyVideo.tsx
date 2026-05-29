@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 
 interface LazyVideoProps {
   src: string;
@@ -24,6 +24,9 @@ interface LazyVideoProps {
  * By default, videos are treated as decorative (aria-hidden="true")
  * since they are typically ambient background videos without speech.
  * Set hasSpokenContent={true} and provide ariaLabel for videos with speech.
+ *
+ * Includes error handling: if the video fails to load, it gracefully
+ * falls back to the poster image and hides the broken video element.
  */
 export default function LazyVideo({
   src,
@@ -42,6 +45,12 @@ export default function LazyVideo({
   const [shouldLoad, setShouldLoad] = useState(
     typeof window !== "undefined" && !("IntersectionObserver" in window)
   );
+  const [hasError, setHasError] = useState(false);
+
+  // Handle video load errors gracefully
+  const handleError = useCallback(() => {
+    setHasError(true);
+  }, []);
 
   useEffect(() => {
     const el = videoRef.current;
@@ -80,6 +89,20 @@ export default function LazyVideo({
     ? { "aria-label": ariaLabel }
     : { "aria-hidden": true as const };
 
+  // If video failed to load, show poster image fallback
+  if (hasError) {
+    return poster ? (
+      <img
+        src={poster}
+        alt={ariaLabel || ""}
+        className={className}
+        {...(ariaLabel ? {} : { "aria-hidden": true as const })}
+      />
+    ) : (
+      <div className={`${className} bg-white/5`} {...ariaProps} />
+    );
+  }
+
   return (
     <video
       ref={videoRef}
@@ -91,6 +114,7 @@ export default function LazyVideo({
       loop={loop}
       playsInline={playsInline}
       preload={preload}
+      onError={handleError}
       {...ariaProps}
     />
   );
