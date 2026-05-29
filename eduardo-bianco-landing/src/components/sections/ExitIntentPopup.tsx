@@ -1,0 +1,115 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { m, AnimatePresence } from "framer-motion";
+import { X, BookOpen, ArrowRight } from "lucide-react";
+
+const EXIT_INTENT_KEY = "eb-exit-intent-dismissed";
+const LEAD_MAGNET_URL = "https://wa.me/5491145779160?text=Hola%20Eduardo%2C%20me%20interesa%20la%20gu%C3%ADa%20gratuita%20sobre%205%20errores%20en%20conflictos%20patrimoniales";
+
+export default function ExitIntentPopup() {
+  const [visible, setVisible] = useState(false);
+
+  const dismiss = useCallback(() => {
+    setVisible(false);
+    try {
+      sessionStorage.setItem(EXIT_INTENT_KEY, "1");
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    // Don't show if already dismissed this session or on mobile (no mouse leave)
+    if (typeof window === "undefined") return;
+    if (window.innerWidth < 768) return; // Exit-intent only works on desktop
+    try {
+      if (sessionStorage.getItem(EXIT_INTENT_KEY)) return;
+    } catch {}
+
+    // Only show after user has been on page for at least 15 seconds
+    const minTime = 15000;
+    const pageLoaded = Date.now();
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      // Only trigger when cursor leaves through the top of the viewport
+      if (e.clientY <= 0 && Date.now() - pageLoaded > minTime) {
+        setVisible(true);
+        document.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
+
+    document.addEventListener("mouseleave", handleMouseLeave);
+    return () => document.removeEventListener("mouseleave", handleMouseLeave);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <>
+          {/* Backdrop */}
+          <m.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+            onClick={dismiss}
+            aria-hidden="true"
+          />
+          {/* Popup */}
+          <m.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Guía gratuita de conflictos patrimoniales"
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 30 }}
+            transition={{ duration: 0.3, type: "spring", damping: 25 }}
+            className="fixed inset-0 z-[61] flex items-center justify-center p-4 pointer-events-none"
+          >
+            <div className="liquid-glass rounded-2xl p-6 sm:p-8 max-w-md w-full pointer-events-auto relative">
+              {/* Close button */}
+              <button
+                onClick={dismiss}
+                className="absolute top-4 right-4 text-white/40 hover:text-white/70 transition-colors"
+                aria-label="Cerrar"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Icon */}
+              <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4">
+                <BookOpen className="w-6 h-6 text-white/70" />
+              </div>
+
+              {/* Copy */}
+              <h3 className="text-xl font-bold text-white mb-2">
+                ¿Se va sin conocer sus opciones?
+              </h3>
+              <p className="text-white/70 text-sm leading-relaxed mb-6">
+                Descargue nuestra guía gratuita: <strong className="text-white/90">5 errores que cometen las familias en conflictos patrimoniales</strong> — y cómo evitarlos. Sin compromiso.
+              </p>
+
+              {/* CTA */}
+              <a
+                href={LEAD_MAGNET_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full bg-white hover:bg-white/90 text-black rounded-xl py-3.5 text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
+              >
+                Quiero la guía gratuita
+                <ArrowRight className="w-4 h-4" />
+              </a>
+
+              <button
+                onClick={dismiss}
+                className="w-full text-white/40 hover:text-white/60 text-xs font-medium mt-4 transition-colors"
+              >
+                No gracias, ya tengo todo resuelto
+              </button>
+            </div>
+          </m.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}

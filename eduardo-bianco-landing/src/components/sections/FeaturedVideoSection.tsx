@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { VIDEO_URLS } from "@/lib/config";
 import LazyVideo from "./LazyVideo";
@@ -21,7 +21,7 @@ export default function FeaturedVideoSection() {
       <div className="max-w-6xl mx-auto">
         {/* Visually hidden heading for aria-labelledby */}
         <h2 id="enfoque-heading" className="sr-only">Nuestro Enfoque</h2>
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 60 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9 }}
@@ -49,7 +49,7 @@ export default function FeaturedVideoSection() {
                 </p>
               </div>
 
-              <motion.a
+              <m.a
                 href="#services"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -57,10 +57,10 @@ export default function FeaturedVideoSection() {
               >
                 Conocer más
                 <ArrowUpRight className="w-4 h-4" />
-              </motion.a>
+              </m.a>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

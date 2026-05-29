@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { Mail, MapPin, ArrowUpRight, MessageCircle } from "lucide-react";
 import { getWhatsAppUrl, WHATSAPP_DISPLAY, CONTACT_EMAIL } from "@/lib/config";
 
@@ -19,7 +19,7 @@ export default function ContactSection() {
     >
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <motion.h2
+        <m.h2
           id="contact-heading"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -28,9 +28,9 @@ export default function ContactSection() {
         >
           Hablemos de{" "}
           <em className="italic text-white/70">su caso</em>
-        </motion.h2>
+        </m.h2>
 
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -39,11 +39,11 @@ export default function ContactSection() {
           La primera consulta es sin compromiso. Cuénteme su situación y
           encontraremos juntos el mejor camino para resolver su conflicto
           patrimonial.
-        </motion.p>
+        </m.p>
 
         {/* Contact cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          <motion.a
+          <m.a
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
@@ -62,9 +62,9 @@ export default function ContactSection() {
               Respuesta inmediata en horario hábil
             </p>
             <ArrowUpRight className="w-4 h-4 text-white/60 mt-4 group-hover:text-white transition-colors" />
-          </motion.a>
+          </m.a>
 
-          <motion.a
+          <m.a
             href={`mailto:${CONTACT_EMAIL}`}
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -81,9 +81,9 @@ export default function ContactSection() {
               Respuesta en 24 horas hábiles
             </p>
             <ArrowUpRight className="w-4 h-4 text-white/60 mt-4 group-hover:text-white transition-colors" />
-          </motion.a>
+          </m.a>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.6 }}
@@ -97,7 +97,7 @@ export default function ContactSection() {
             <p className="text-white/70 text-sm">
               Argentina. Consultas presenciales y virtuales.
             </p>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

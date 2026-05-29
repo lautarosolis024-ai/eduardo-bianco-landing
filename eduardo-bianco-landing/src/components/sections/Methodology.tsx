@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { methodologySteps } from "@/data/methodology";
 import { Search, Ear, Calculator, MessageSquare, FileCheck } from "lucide-react";
 
@@ -30,7 +30,7 @@ export default function Methodology() {
 
       <div className="max-w-6xl mx-auto relative">
         {/* Heading */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -43,7 +43,7 @@ export default function Methodology() {
           <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
             Un proceso claro y probado de 5 pasos para resolver su conflicto patrimonial.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Desktop: horizontal timeline */}
         <div className="hidden md:flex items-start justify-between gap-2 relative" role="list" aria-label="Metodología de 5 pasos">
@@ -53,7 +53,7 @@ export default function Methodology() {
           {methodologySteps.map((step, i) => {
             const IconComponent = iconMap[step.icon] || Search;
             return (
-              <motion.div
+              <m.div
                 key={step.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -71,7 +71,7 @@ export default function Methodology() {
                 <p className="text-xs text-white/70 text-center leading-relaxed max-w-[180px]">
                   {step.description}
                 </p>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
@@ -83,7 +83,7 @@ export default function Methodology() {
           {methodologySteps.map((step, i) => {
             const IconComponent = iconMap[step.icon] || Search;
             return (
-              <motion.div
+              <m.div
                 key={step.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -99,7 +99,7 @@ export default function Methodology() {
                   <h3 className="text-base font-semibold text-white mb-1">{step.title}</h3>
                   <p className="text-sm text-white/70 leading-relaxed">{step.description}</p>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

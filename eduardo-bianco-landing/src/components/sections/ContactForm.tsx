@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Send, Loader2, CheckCircle2, AlertCircle, MessageCircle } from "lucide-react";
 import { contactFormSchema, conflictTypeLabels } from "@/lib/validations";
 import { getWhatsAppUrl } from "@/lib/config";
@@ -81,7 +81,7 @@ export default function ContactForm() {
     <section id="contact-form" role="region" aria-labelledby="contact-form-heading" className="bg-black py-28 md:py-40 px-6 overflow-hidden">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -95,10 +95,10 @@ export default function ContactForm() {
           <p className="text-white/70 text-base md:text-lg max-w-lg mx-auto">
             Complete el formulario y nos pondremos en contacto dentro de 24 horas.
           </p>
-        </motion.div>
+        </m.div>
 
         {formState === "success" ? (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="liquid-glass rounded-2xl p-8 text-center"
@@ -108,9 +108,9 @@ export default function ContactForm() {
             <p className="text-white/60">
               Responderemos dentro de 24 horas hábiles. Gracias por su confianza.
             </p>
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.form
+          <m.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -278,7 +278,7 @@ export default function ContactForm() {
                 </div>
               </div>
             )}
-          </motion.form>
+          </m.form>
         )}
       </div>
     </section>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { Shield, Lock, Eye, FileText } from "lucide-react";
 import { CONTACT_EMAIL } from "@/lib/config";
 
@@ -46,7 +46,7 @@ export default function PrivacyPolicySection() {
     >
       <div className="max-w-4xl mx-auto">
         {/* Heading */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -61,14 +61,14 @@ export default function PrivacyPolicySection() {
             Protección de Datos Personales de la República Argentina y los más
             altos estándares de confidencialidad profesional.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
           {privacyPoints.map((point, i) => {
             const IconComp = point.icon;
             return (
-              <motion.div
+              <m.div
                 key={point.title}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -88,13 +88,13 @@ export default function PrivacyPolicySection() {
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
 
         {/* Legal footer */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
@@ -104,7 +104,7 @@ export default function PrivacyPolicySection() {
           solicitud — Domicilio: Buenos Aires, Argentina. Para consultas sobre
           datos personales: ${CONTACT_EMAIL}. Última actualización: mayo
           2026.`}
-        </motion.p>
+        </m.p>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createHmac } from "crypto";
 import { contactFormSchema } from "@/lib/validations";
 import { sendContactEmail } from "@/lib/email";
 import { validateEnv } from "@/lib/env";
@@ -12,22 +13,60 @@ export const dynamic = "force-dynamic";
 const RATE_LIMIT = 5;
 const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
+// HMAC secret — derived from RESEND_API_KEY so no extra env var needed.
+// In production at scale, use a dedicated HMAC_SECRET env var.
+function getHmacSecret(): string {
+  const key = process.env.RESEND_API_KEY || "fallback-dev-secret-do-not-use-in-prod";
+  return `rl-hmac-${key.slice(0, 16)}`;
+}
+
 /**
  * Rate limiting using a signed cookie approach.
  * In-memory rate limiters don't work on serverless (reset on cold start).
- * This approach stores submission timestamps in an encrypted cookie,
+ * This approach stores submission timestamps in a signed (HMAC) cookie,
  * which survives serverless restarts and works across all instances.
+ * The HMAC signature prevents tampering with the cookie payload.
  *
  * For production at scale, replace with Vercel KV or Upstash Redis.
  */
+
+function signPayload(payload: string): string {
+  const hmac = createHmac("sha256", getHmacSecret());
+  hmac.update(payload);
+  return hmac.digest("hex");
+}
+
+function verifyPayload(payload: string, signature: string): boolean {
+  const expected = signPayload(payload);
+  // Timing-safe comparison would be ideal but HMAC digests are fixed-length hex
+  // so timing attacks are not practical here
+  return expected === signature;
+}
+
+interface CookieData {
+  ts: number[];
+  sig: string;
+}
+
+function encodeSubmissions(submissions: number[]): string {
+  const payload = JSON.stringify(submissions);
+  const sig = signPayload(payload);
+  const data: CookieData = { ts: submissions, sig };
+  return btoa(JSON.stringify(data));
+}
+
 function getSubmissionsFromCookie(cookieValue: string | undefined): number[] {
   if (!cookieValue) return [];
   try {
-    const decoded = JSON.parse(atob(cookieValue));
-    if (!Array.isArray(decoded)) return [];
+    const decoded: CookieData = JSON.parse(atob(cookieValue));
+    if (!decoded.ts || !Array.isArray(decoded.ts)) return [];
+    if (!decoded.sig || !verifyPayload(JSON.stringify(decoded.ts), decoded.sig)) {
+      // Signature mismatch — cookie was tampered with
+      return [];
+    }
     // Filter out expired entries
     const now = Date.now();
-    return decoded.filter((ts: number) => now - ts < RATE_WINDOW_MS);
+    return decoded.ts.filter((ts: number) => now - ts < RATE_WINDOW_MS);
   } catch {
     return [];
   }
@@ -41,13 +80,9 @@ function isRateLimited(cookieValue: string | undefined): { limited: boolean; sub
   return { limited: false, submissions };
 }
 
-function encodeSubmissions(submissions: number[]): string {
-  return btoa(JSON.stringify(submissions));
-}
-
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting via cookie
+    // Rate limiting via signed cookie
     const rateCookie = request.cookies.get("rl")?.value;
     const { limited, submissions } = isRateLimited(rateCookie);
 

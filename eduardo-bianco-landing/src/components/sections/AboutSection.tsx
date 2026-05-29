@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { getWhatsAppUrl, BUSINESS_STATS } from "@/lib/config";
 
@@ -28,17 +28,17 @@ export default function AboutSection() {
 
       <div className="max-w-6xl mx-auto relative">
         {/* Label */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-white/60 text-sm tracking-widest uppercase mb-8"
         >
           Sobre mí
-        </motion.p>
+        </m.p>
 
         {/* Heading — contrast fixed */}
-        <motion.h2
+        <m.h2
           id="about-heading"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -51,10 +51,10 @@ export default function AboutSection() {
           <em className="italic text-white/70">
             familias que buscan justicia
           </em>
-        </motion.h2>
+        </m.h2>
 
         {/* Body text — contrast fixed */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -80,10 +80,10 @@ export default function AboutSection() {
             Solicitar consulta gratuita
             <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </a>
-        </motion.div>
+        </m.div>
 
         {/* Stats row */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -99,7 +99,7 @@ export default function AboutSection() {
               </p>
             </div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

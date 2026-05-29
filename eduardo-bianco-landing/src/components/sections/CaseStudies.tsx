@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { caseStudies } from "@/data/case-studies";
 import { Users, Handshake, Car } from "lucide-react";
 
@@ -21,7 +21,7 @@ export default function CaseStudies() {
     >
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -34,14 +34,14 @@ export default function CaseStudies() {
           <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
             Resultados concretos que demuestran nuestra capacidad para resolver conflictos patrimoniales complejos.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {caseStudies.map((cs, i) => {
             const IconComponent = iconMap[cs.icon] || Users;
             return (
-              <motion.div
+              <m.div
                 key={cs.id}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -75,7 +75,7 @@ export default function CaseStudies() {
                     <p className="text-white text-sm font-medium leading-relaxed">{cs.result}</p>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

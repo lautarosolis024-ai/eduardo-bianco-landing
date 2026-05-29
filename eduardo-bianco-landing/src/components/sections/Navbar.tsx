@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Globe, Menu, X } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/config";
 
@@ -154,7 +154,7 @@ export default function Navbar() {
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
+          <m.div
             id="mobile-menu"
             ref={menuRef}
             role="dialog"
@@ -189,7 +189,7 @@ export default function Navbar() {
             >
               WhatsApp
             </a>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </nav>

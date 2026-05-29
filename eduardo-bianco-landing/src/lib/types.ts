@@ -22,6 +22,13 @@ export interface WhyChooseUsItem {
   icon: string;
 }
 
+export interface Testimonial {
+  quote: string;
+  name: string;
+  context: string;
+  type: string;
+}
+
 // ContactFormData is deprecated — use ContactFormValues from validations.ts instead
 // (auto-derived from the Zod schema so it can never go out of sync)
 export type { ContactFormValues as ContactFormData } from "./validations";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { Quote, Star } from "lucide-react";
 import { testimonials } from "@/data/testimonials";
 
@@ -44,7 +44,7 @@ export default function TestimonialsSection() {
 
       <div className="max-w-6xl mx-auto relative">
         {/* Heading */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -68,12 +68,12 @@ export default function TestimonialsSection() {
           <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
             Resultados reales. Historias reales. Identidades protegidas por confidencialidad.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Testimonial cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {testimonials.map((t, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -100,7 +100,7 @@ export default function TestimonialsSection() {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

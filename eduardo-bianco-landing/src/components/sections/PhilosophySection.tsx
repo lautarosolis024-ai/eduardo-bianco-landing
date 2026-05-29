@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { VIDEO_URLS } from "@/lib/config";
 import LazyVideo from "./LazyVideo";
 
@@ -19,7 +19,7 @@ export default function PhilosophySection() {
     >
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <motion.h2
+        <m.h2
           id="philosophy-heading"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -28,12 +28,12 @@ export default function PhilosophySection() {
         >
           Experiencia{" "}
           <em className="italic text-white/60">×</em> Resolución
-        </motion.h2>
+        </m.h2>
 
         {/* Two-column grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {/* Left - Video */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -44,10 +44,10 @@ export default function PhilosophySection() {
               poster="/og-image.png"
               className="w-full h-full object-cover"
             />
-          </motion.div>
+          </m.div>
 
           {/* Right - Text blocks */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -80,7 +80,7 @@ export default function PhilosophySection() {
                 podría haber durado años.
               </p>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

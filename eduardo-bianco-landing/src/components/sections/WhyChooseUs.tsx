@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { Clock, TrendingUp, ListChecks, Shield, X } from "lucide-react";
 import { whyChooseUsItems } from "@/data/why-choose-us";
 
@@ -33,7 +33,7 @@ export default function WhyChooseUs() {
     >
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -46,14 +46,14 @@ export default function WhyChooseUs() {
           <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
             Combinamos experiencia, metodología y enfoque independiente para resolver su conflicto.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Strengths cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-16">
           {whyChooseUsItems.map((item, i) => {
             const IconComponent = iconMap[item.icon] || Clock;
             return (
-              <motion.div
+              <m.div
                 key={item.id}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -69,13 +69,13 @@ export default function WhyChooseUs() {
                     <p className="text-white/70 text-sm leading-relaxed">{item.description}</p>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
 
         {/* Competitive comparison: Us vs. Abogados tradicionales */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -91,7 +91,7 @@ export default function WhyChooseUs() {
             {comparisons.map((comp, i) => {
               const IconComp = comp.icon;
               return (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -114,14 +114,14 @@ export default function WhyChooseUs() {
                     </div>
                     <p className="text-white/70 text-sm">{comp.they}</p>
                   </div>
-                </motion.div>
+                </m.div>
               );
             })}
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Tagline */}
-        <motion.blockquote
+        <m.blockquote
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 1 }}
@@ -130,7 +130,7 @@ export default function WhyChooseUs() {
           <p className="text-xl sm:text-2xl font-semibold text-white/80 italic font-instrument">
             &ldquo;Entendemos el conflicto, no lo agravamos. Lo resolvemos.&rdquo;
           </p>
-        </motion.blockquote>
+        </m.blockquote>
       </div>
     </section>
   );

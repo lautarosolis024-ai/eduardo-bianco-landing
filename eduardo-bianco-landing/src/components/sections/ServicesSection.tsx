@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { MessageCircle, ArrowUpRight } from "lucide-react";
 import { getWhatsAppUrl, VIDEO_URLS } from "@/lib/config";
 import LazyVideo from "./LazyVideo";
@@ -39,7 +39,7 @@ export default function ServicesSection() {
     >
       <div className="max-w-6xl mx-auto bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.02)_0%,_transparent_60%)]">
         {/* Header row */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
@@ -51,12 +51,12 @@ export default function ServicesSection() {
           <span className="text-white/60 text-sm hidden md:inline">
             Nuestros servicios
           </span>
-        </motion.div>
+        </m.div>
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {services.map((service, i) => (
-            <motion.div
+            <m.div
               key={service.tag}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -99,7 +99,7 @@ export default function ServicesSection() {
                   <ArrowUpRight className="w-3 h-3" />
                 </a>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { m, useInView, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
@@ -71,7 +71,7 @@ export default function FAQSection() {
       />
       <div className="max-w-3xl mx-auto">
         {/* Heading */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -83,14 +83,14 @@ export default function FAQSection() {
           <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
             Respuestas claras a las dudas más comunes sobre nuestro enfoque de resolución de conflictos.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* FAQ accordion */}
         <div className="space-y-3">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i;
             return (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -115,7 +115,7 @@ export default function FAQSection() {
                 </button>
                 <AnimatePresence initial={false}>
                   {isOpen && (
-                    <motion.div
+                    <m.div
                       id={`faq-panel-${i}`}
                       role="region"
                       aria-labelledby={`faq-button-${i}`}
@@ -128,10 +128,10 @@ export default function FAQSection() {
                       <p className="px-5 sm:px-6 pb-5 sm:pb-6 text-white/70 text-sm leading-relaxed">
                         {faq.answer}
                       </p>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

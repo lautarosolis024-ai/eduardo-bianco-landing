@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { MotionConfig } from "framer-motion";
+import { MotionConfig, LazyMotion, domAnimation } from "framer-motion";
 import { PHONE_SCHEMA, CONTACT_EMAIL } from "@/lib/config";
 import "./globals.css";
 
@@ -113,6 +113,19 @@ const jsonLd = {
   // Add back only when real review data (e.g. Google Reviews) is integrated.
 };
 
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://eduardobianco.com.ar",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -123,15 +136,22 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" />
         <link rel="dns-prefetch" href="https://d8j0ntlcm91z4.cloudfront.net" />
+        <link rel="preload" as="fetch" href="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.variable} ${instrumentSerif.variable} font-sans antialiased bg-black text-white`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <MotionConfig reducedMotion="user">
-          {children}
-        </MotionConfig>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
+        <LazyMotion features={domAnimation} strict>
+          <MotionConfig reducedMotion="user">
+            {children}
+          </MotionConfig>
+        </LazyMotion>
         <Analytics />
         <SpeedInsights />
       </body>
