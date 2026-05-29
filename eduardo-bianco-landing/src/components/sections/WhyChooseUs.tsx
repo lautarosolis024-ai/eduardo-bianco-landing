@@ -29,7 +29,7 @@ export default function WhyChooseUs() {
       ref={ref}
       role="region"
       aria-labelledby="why-us-heading"
-      className="bg-black py-28 md:py-40 px-6 overflow-hidden"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
@@ -43,7 +43,7 @@ export default function WhyChooseUs() {
             Por qué{" "}
             <em className="italic text-white/70">elegirnos</em>
           </h2>
-          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto">
             Combinamos experiencia, metodología y enfoque independiente para resolver su conflicto.
           </p>
         </m.div>
@@ -66,7 +66,7 @@ export default function WhyChooseUs() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-                    <p className="text-white/70 text-sm leading-relaxed">{item.description}</p>
+                    <p className="text-white/80 text-sm leading-relaxed">{item.description}</p>
                   </div>
                 </div>
               </m.div>

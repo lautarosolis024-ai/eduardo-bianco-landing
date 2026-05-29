@@ -16,7 +16,7 @@ export default function FeaturedVideoSection() {
       ref={ref}
       role="region"
       aria-labelledby="enfoque-heading"
-      className="bg-black pt-6 md:pt-10 pb-20 md:pb-32 px-6 overflow-hidden"
+      className="bg-black pt-6 md:pt-10 pb-16 md:pb-24 px-6 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         {/* Visually hidden heading for aria-labelledby */}

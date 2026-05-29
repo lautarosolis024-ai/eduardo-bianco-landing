@@ -31,7 +31,7 @@ export default function TestimonialsSection() {
       ref={ref}
       role="region"
       aria-labelledby="testimonials-heading"
-      className="bg-black py-28 md:py-40 px-6 overflow-hidden relative"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden relative"
     >
       {/* Review structured data */}
       <script
@@ -65,7 +65,7 @@ export default function TestimonialsSection() {
             <span className="text-white/70 text-sm">Testimonios basados en casos reales</span>
           </div>
 
-          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto">
             Resultados reales. Historias reales. Identidades protegidas por confidencialidad.
           </p>
         </m.div>

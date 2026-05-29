@@ -35,7 +35,7 @@ export default function Credentials() {
       ref={ref}
       role="region"
       aria-labelledby="credentials-heading"
-      className="bg-black py-28 md:py-40 px-6 overflow-hidden relative"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden relative"
     >
       {/* Subtle gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(255,255,255,0.03)_0%,_transparent_70%)] pointer-events-none" />
@@ -52,7 +52,7 @@ export default function Credentials() {
             Credenciales y{" "}
             <em className="italic text-white/70">equipo</em>
           </h2>
-          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto">
             Experiencia sólida respaldada por formación académica y trayectoria profesional.
           </p>
         </m.div>

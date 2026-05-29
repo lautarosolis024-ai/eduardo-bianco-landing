@@ -94,7 +94,7 @@ export default function ExitIntentPopup() {
                 href={getWhatsAppUrl("Hola Eduardo, me interesa la guía gratuita sobre 5 errores en conflictos patrimoniales")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full bg-white hover:bg-white/90 text-black rounded-xl py-3.5 text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
+                className="flex items-center justify-center gap-2 w-full bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-xl py-3.5 text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[48px] shadow-[0_0_20px_rgba(212,135,90,0.2)]"
               >
                 Quiero la guía gratuita
                 <ArrowRight className="w-4 h-4" />

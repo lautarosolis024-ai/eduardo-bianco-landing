@@ -27,7 +27,7 @@ export default function Error({
         <div className="flex flex-col gap-3">
           <button
             onClick={reset}
-            className="w-full bg-white hover:bg-white/90 text-black rounded-xl py-3 text-sm font-semibold transition-colors min-h-[44px]"
+            className="w-full bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-xl py-3 text-sm font-semibold transition-colors min-h-[44px]"
           >
             Intentar de nuevo
           </button>

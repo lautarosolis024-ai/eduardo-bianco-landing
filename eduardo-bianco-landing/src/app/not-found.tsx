@@ -18,7 +18,7 @@ export default function NotFound() {
         <div className="flex flex-col gap-3">
           <a
             href="/"
-            className="inline-flex items-center justify-center gap-2 bg-white hover:bg-white/90 text-black rounded-xl px-6 py-3 text-sm font-semibold transition-colors min-h-[44px]"
+            className="inline-flex items-center justify-center gap-2 bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-xl px-6 py-3 text-sm font-semibold transition-colors min-h-[44px]"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver al inicio

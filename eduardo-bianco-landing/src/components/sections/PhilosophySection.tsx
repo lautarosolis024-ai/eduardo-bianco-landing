@@ -15,7 +15,7 @@ export default function PhilosophySection() {
       ref={ref}
       role="region"
       aria-labelledby="philosophy-heading"
-      className="bg-black py-28 md:py-40 px-6 overflow-hidden"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
@@ -57,7 +57,7 @@ export default function PhilosophySection() {
               <p className="text-white/70 text-xs tracking-widest uppercase mb-4">
                 Diálogo sobre confrontación
               </p>
-              <p className="text-white/70 text-base md:text-lg leading-relaxed">
+              <p className="text-white/80 text-base md:text-lg leading-relaxed">
                 Creemos que cada conflicto patrimonial tiene una solución que no
                 pasa por el desgaste judicial. Nuestra experiencia nos permite
                 encontrar puntos de encuentro donde parece imposible, transformando
@@ -72,7 +72,7 @@ export default function PhilosophySection() {
               <p className="text-white/70 text-xs tracking-widest uppercase mb-4">
                 Resultados sobre promesas
               </p>
-              <p className="text-white/70 text-base md:text-lg leading-relaxed">
+              <p className="text-white/80 text-base md:text-lg leading-relaxed">
                 No vendemos falsas expectativas. Cada caso comienza con un
                 diagnóstico honesto y un plan con plazos definidos. Nuestro
                 compromiso es con los resultados concretos: acuerdos reales,

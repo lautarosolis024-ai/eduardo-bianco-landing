@@ -42,7 +42,7 @@ export default function PrivacyPolicySection() {
       ref={ref}
       role="region"
       aria-labelledby="privacy-heading"
-      className="bg-black py-28 md:py-40 px-6 overflow-hidden"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden"
     >
       <div className="max-w-4xl mx-auto">
         {/* Heading */}
@@ -56,7 +56,7 @@ export default function PrivacyPolicySection() {
             Política de{" "}
             <em className="italic text-white/70">privacidad</em>
           </h2>
-          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto">
             Protegemos sus datos personales conforme a la Ley 25.326 de
             Protección de Datos Personales de la República Argentina y los más
             altos estándares de confidencialidad profesional.
@@ -83,7 +83,7 @@ export default function PrivacyPolicySection() {
                     <h3 className="text-lg font-semibold text-white mb-2">
                       {point.title}
                     </h3>
-                    <p className="text-white/70 text-sm leading-relaxed">
+                    <p className="text-white/80 text-sm leading-relaxed">
                       {point.description}
                     </p>
                   </div>

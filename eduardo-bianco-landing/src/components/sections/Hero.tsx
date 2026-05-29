@@ -95,7 +95,7 @@ export default function Hero() {
   }, [handleCanPlay, handleTimeUpdate, handleEnded, handleVideoError]);
 
   return (
-    <section className="min-h-screen overflow-hidden relative flex flex-col">
+    <section className="min-h-[85vh] md:min-h-screen overflow-hidden relative flex flex-col">
       {/* Skip to content link for keyboard users */}
       <a
         href="#main-content"
@@ -118,9 +118,10 @@ export default function Hero() {
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(212,135,90,0.05)]" />
 
       {/* Hero content */}
-      <div id="main-content" className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-12 text-center -translate-y-[10%] md:-translate-y-[20%]">
+      <div id="main-content" className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-10 text-center -translate-y-[5%] md:-translate-y-[10%]">
         {/* Differentiator headline: credentials as hero statement */}
         <div className="flex items-center gap-2 mb-6">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-white/70 text-xs font-medium tracking-wide">
@@ -135,7 +136,7 @@ export default function Hero() {
         </h1>
 
         {/* Differentiator sub-headline — WHY this person, not any lawyer */}
-        <p className="text-white/80 text-lg md:text-xl font-medium mb-2 font-instrument">
+        <p className="text-white/80 text-base md:text-lg font-medium mb-2 font-instrument">
           Economista, Contador y Mediador — no solo abogado
         </p>
 
@@ -154,7 +155,7 @@ export default function Hero() {
                 href={getWhatsAppUrl(`Hola Eduardo, tengo un conflicto de ${ct.label.toLowerCase()} y necesito una consulta.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="liquid-glass rounded-full px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs sm:text-sm font-medium transition-colors"
+                className="liquid-glass rounded-full px-5 py-2.5 text-white/80 hover:text-white hover:bg-white/5 text-xs sm:text-sm font-medium transition-colors min-h-[44px]"
                 aria-label={ct.ariaLabel}
               >
                 <span className="mr-1" aria-hidden="true">{ct.emoji}</span> {ct.label}
@@ -169,7 +170,7 @@ export default function Hero() {
             href={getWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3 bg-white hover:bg-white/90 text-black rounded-full px-8 py-4 text-base font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-white/10 min-h-[52px]"
+            className="flex items-center justify-center gap-3 bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-full px-8 py-4 text-base font-bold transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_30px_rgba(212,135,90,0.2)] hover:shadow-[0_0_40px_rgba(212,135,90,0.35)] min-h-[52px]"
           >
             <MessageCircle className="w-5 h-5" />
             Consulta sin cargo
@@ -184,24 +185,24 @@ export default function Hero() {
           </a>
         </div>
 
-        <p className="text-white/70 text-sm sm:text-base leading-relaxed px-4 max-w-lg">
+        <p className="text-white/80 text-base leading-relaxed px-4 max-w-lg">
           Más de 20 años resolviendo conflictos patrimoniales donde la familia y
           el dinero se cruzan. Sin juicios. Sin desgaste.
         </p>
 
         {/* Urgency badge + trust signal */}
         <div className="mt-3 flex flex-col items-center gap-1">
-          <p className="text-white/60 text-xs">
+          <p className="text-white/70 text-xs">
             Consulta gratuita · Cupos limitados mensuales
           </p>
-          <p className="text-white/50 text-xs">
+          <p className="text-white/60 text-xs">
             ★ ★ ★ ★ ★ 500+ conflictos resueltos
           </p>
         </div>
       </div>
 
       {/* Social icons footer */}
-      <div className="relative z-10 flex justify-center gap-4 pb-12">
+      <div className="relative z-10 flex justify-center gap-4 pb-8">
         <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="WhatsApp">
           <MessageCircle className="w-5 h-5" />
         </a>

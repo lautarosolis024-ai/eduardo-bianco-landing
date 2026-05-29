@@ -22,7 +22,7 @@ export default function AboutSection() {
       ref={ref}
       role="region"
       aria-labelledby="about-heading"
-      className="bg-black pt-32 md:pt-44 pb-10 md:pb-14 px-6 overflow-hidden relative"
+      className="bg-black pt-24 md:pt-32 pb-8 md:pb-12 px-6 overflow-hidden relative"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.04)_0%,_transparent_70%)] pointer-events-none" />
 
@@ -60,7 +60,7 @@ export default function AboutSection() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mt-12 max-w-2xl"
         >
-          <p className="text-white/70 text-base md:text-lg leading-relaxed">
+          <p className="text-white/80 text-base md:text-lg leading-relaxed">
             Economista, Contador Público y Mediador con más de dos décadas de
             experiencia exclusiva en conflictos patrimoniales. He ayudado a
             cientos de familias y empresas a encontrar soluciones justas donde

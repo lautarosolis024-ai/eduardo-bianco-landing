@@ -17,7 +17,7 @@ export default function CaseStudies() {
       ref={ref}
       role="region"
       aria-labelledby="cases-heading"
-      className="bg-black py-28 md:py-40 px-6 overflow-hidden"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
@@ -31,7 +31,7 @@ export default function CaseStudies() {
             Casos de{" "}
             <em className="italic text-white/70">éxito</em>
           </h2>
-          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto">
             Resultados concretos que demuestran nuestra capacidad para resolver conflictos patrimoniales complejos.
           </p>
         </m.div>
@@ -60,13 +60,13 @@ export default function CaseStudies() {
                     <p className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-1">
                       Conflicto
                     </p>
-                    <p className="text-white/70 text-sm leading-relaxed">{cs.conflict}</p>
+                    <p className="text-white/80 text-sm leading-relaxed">{cs.conflict}</p>
                   </div>
                   <div>
                     <p className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-1">
                       Abordaje
                     </p>
-                    <p className="text-white/70 text-sm leading-relaxed">{cs.approach}</p>
+                    <p className="text-white/80 text-sm leading-relaxed">{cs.approach}</p>
                   </div>
                   <div className="bg-white/5 rounded-xl p-4 mt-4">
                     <p className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-1">

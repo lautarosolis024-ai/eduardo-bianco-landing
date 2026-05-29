@@ -13,6 +13,7 @@
   --color-border: var(--border);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-accent: var(--accent);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -28,6 +29,9 @@
   --border: rgba(255,255,255,0.1);
   --input: rgba(255,255,255,0.1);
   --ring: rgba(255,255,255,0.3);
+  --accent: #D4875A;
+  --accent-hover: #c77a4f;
+  --accent-glow: rgba(212,135,90,0.2);
 }
 
 @layer base {

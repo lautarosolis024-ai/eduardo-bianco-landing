@@ -86,7 +86,7 @@ export default function ContactCombined() {
       ref={ref}
       role="region"
       aria-labelledby="contact-heading"
-      className="bg-black py-28 md:py-40 px-6 overflow-hidden"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
@@ -105,7 +105,7 @@ export default function ContactCombined() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-white/70 text-base md:text-lg max-w-xl mb-12 leading-relaxed"
+          className="text-white/80 text-base md:text-lg max-w-xl mb-12 leading-relaxed"
         >
           La primera consulta es sin compromiso. Cuénteme su situación y
           encontraremos juntos el mejor camino para resolver su conflicto
@@ -315,7 +315,7 @@ export default function ContactCombined() {
               <button
                 type="submit"
                 disabled={formState === "loading"}
-                className="w-full bg-white hover:bg-white/90 text-black rounded-xl py-4 text-base font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[52px]"
+                className="w-full bg-[#D4875A] hover:bg-[#c77a4f] text-white rounded-xl py-4 text-base font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[52px] shadow-[0_0_20px_rgba(212,135,90,0.15)]"
               >
                 {formState === "loading" ? (
                   <>

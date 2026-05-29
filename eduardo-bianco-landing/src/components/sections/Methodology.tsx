@@ -23,7 +23,7 @@ export default function Methodology() {
       ref={ref}
       role="region"
       aria-labelledby="methodology-heading"
-      className="bg-black py-28 md:py-40 px-6 overflow-hidden relative"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden relative"
     >
       {/* Subtle radial bg */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.02)_0%,_transparent_60%)] pointer-events-none" />
@@ -40,7 +40,7 @@ export default function Methodology() {
             Nuestra{" "}
             <em className="italic text-white/70">metodología</em>
           </h2>
-          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto">
             Un proceso claro y probado de 5 pasos para resolver su conflicto patrimonial.
           </p>
         </m.div>

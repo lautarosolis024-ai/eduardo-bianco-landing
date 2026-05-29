@@ -35,7 +35,7 @@ export default function ServicesSection() {
       ref={ref}
       role="region"
       aria-labelledby="services-heading"
-      className="bg-black py-28 md:py-40 px-6 overflow-hidden"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.02)_0%,_transparent_60%)]">
         {/* Header row */}
@@ -83,7 +83,7 @@ export default function ServicesSection() {
                 <h3 className="text-white text-xl md:text-2xl mb-3 tracking-tight font-instrument">
                   {service.title}
                 </h3>
-                <p className="text-white/70 text-sm leading-relaxed mb-5">
+                <p className="text-white/80 text-sm leading-relaxed mb-5">
                   {service.description}
                 </p>
 

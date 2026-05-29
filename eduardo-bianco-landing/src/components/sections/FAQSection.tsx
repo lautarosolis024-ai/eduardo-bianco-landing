@@ -62,7 +62,7 @@ export default function FAQSection() {
       ref={ref}
       role="region"
       aria-labelledby="faq-heading"
-      className="bg-black py-28 md:py-40 px-6 overflow-hidden"
+      className="bg-black py-20 md:py-32 px-6 overflow-hidden"
     >
       {/* FAQ structured data for search engines */}
       <script
@@ -80,7 +80,7 @@ export default function FAQSection() {
           <h2 id="faq-heading" className="text-4xl md:text-6xl lg:text-7xl text-white tracking-tight font-instrument mb-4">
             Preguntas frecuentes
           </h2>
-          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/80 text-base md:text-lg max-w-2xl mx-auto">
             Respuestas claras a las dudas más comunes sobre nuestro enfoque de resolución de conflictos.
           </p>
         </m.div>
@@ -125,7 +125,7 @@ export default function FAQSection() {
                       transition={{ duration: 0.2 }}
                       className="overflow-hidden"
                     >
-                      <p className="px-5 sm:px-6 pb-5 sm:pb-6 text-white/70 text-sm leading-relaxed">
+                      <p className="px-5 sm:px-6 pb-5 sm:pb-6 text-white/80 text-sm leading-relaxed">
                         {faq.answer}
                       </p>
                     </m.div>
