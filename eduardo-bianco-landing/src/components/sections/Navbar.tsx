@@ -80,7 +80,7 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="text-white text-sm font-medium hover:text-white/80 transition-colors hidden sm:inline"
           >
-            Consulta
+            Consulta sin cargo
           </a>
           <a
             href="#contact"

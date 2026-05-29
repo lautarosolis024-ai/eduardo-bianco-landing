@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Quote } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 import { testimonials } from "@/data/testimonials";
 
 export default function TestimonialsSection() {
@@ -54,6 +54,17 @@ export default function TestimonialsSection() {
             Lo que dicen nuestros{" "}
             <em className="italic text-white/70">clientes</em>
           </h2>
+
+          {/* Social proof: star rating + verified badge */}
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="flex items-center gap-0.5" aria-label="5 de 5 estrellas">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Star key={i} className="w-4 h-4 fill-[#D4875A] text-[#D4875A]" aria-hidden="true" />
+              ))}
+            </div>
+            <span className="text-white/70 text-sm">Casos verificados</span>
+          </div>
+
           <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
             Resultados reales. Historias reales. Identidades protegidas por confidencialidad.
           </p>
@@ -70,6 +81,11 @@ export default function TestimonialsSection() {
               className="liquid-glass rounded-2xl p-6 sm:p-8 flex flex-col"
             >
               <Quote className="w-8 h-8 text-white/20 mb-4 shrink-0" aria-hidden="true" />
+              <div className="flex items-center gap-0.5 mb-3" aria-label="5 de 5 estrellas">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <Star key={s} className="w-3.5 h-3.5 fill-[#D4875A] text-[#D4875A]" aria-hidden="true" />
+                ))}
+              </div>
               <blockquote className="text-white/80 text-sm leading-relaxed flex-1 mb-6">
                 &ldquo;{t.quote}&rdquo;
               </blockquote>

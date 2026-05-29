@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 import { GraduationCap, Briefcase, Building2, Users } from "lucide-react";
 
 const credentials = [
@@ -63,9 +64,16 @@ export default function Credentials() {
           className="max-w-3xl mx-auto mb-12"
         >
           <div className="liquid-glass rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start">
-            {/* Avatar */}
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white flex items-center justify-center shrink-0">
-              <span className="text-2xl font-bold text-black">EB</span>
+            {/* Professional headshot */}
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full shrink-0 overflow-hidden border-2 border-white/10">
+              <Image
+                src="/eduardo-bianco-headshot.png"
+                alt="Eduardo Julio Bianco — Economista, Contador y Mediador"
+                width={80}
+                height={80}
+                className="w-full h-full object-cover"
+                priority={false}
+              />
             </div>
             <div>
               <h3 className="text-xl font-bold text-white mb-1">Eduardo Julio Bianco</h3>

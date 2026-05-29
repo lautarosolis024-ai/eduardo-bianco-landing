@@ -136,23 +136,26 @@ export default function Hero() {
         </p>
 
         {/* Audience-segmented quick-select pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
-          {conflictTypes.map((ct) => (
-            <a
-              key={ct.id}
-              href={getWhatsAppUrl(`Hola Eduardo, tengo un conflicto de ${ct.label.toLowerCase()} y necesito una consulta.`)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="liquid-glass rounded-full px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs sm:text-sm font-medium transition-colors"
-              aria-label={ct.ariaLabel}
-            >
-              <span className="mr-1" aria-hidden="true">{ct.emoji}</span> {ct.label}
-            </a>
-          ))}
+        <div className="flex flex-col items-center mb-8">
+          <p className="text-white/60 text-xs mb-3">¿Qué conflicto tiene?</p>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {conflictTypes.map((ct) => (
+              <a
+                key={ct.id}
+                href={getWhatsAppUrl(`Hola Eduardo, tengo un conflicto de ${ct.label.toLowerCase()} y necesito una consulta.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="liquid-glass rounded-full px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs sm:text-sm font-medium transition-colors"
+                aria-label={ct.ariaLabel}
+              >
+                <span className="mr-1" aria-hidden="true">{ct.emoji}</span> {ct.label}
+              </a>
+            ))}
+          </div>
         </div>
 
-        {/* Primary CTA — white button */}
-        <div className="max-w-md w-full mb-6">
+        {/* Dual CTA — WhatsApp (primary) + Form (secondary) */}
+        <div className="max-w-md w-full mb-6 flex flex-col gap-3">
           <a
             href={getWhatsAppUrl()}
             target="_blank"
@@ -160,8 +163,15 @@ export default function Hero() {
             className="flex items-center justify-center gap-3 bg-white hover:bg-white/90 text-black rounded-full px-8 py-4 text-base font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-white/10 min-h-[52px]"
           >
             <MessageCircle className="w-5 h-5" />
-            Consulta por WhatsApp
+            Consulta sin cargo
             <ArrowRight className="w-4 h-4" />
+          </a>
+          <a
+            href="#contact-form"
+            className="flex items-center justify-center gap-2 liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors min-h-[44px]"
+          >
+            <Phone className="w-4 h-4" />
+            O complete el formulario
           </a>
         </div>
 
@@ -174,14 +184,6 @@ export default function Hero() {
         <p className="mt-3 text-white/60 text-xs">
           Consulta gratuita · Cupos limitados mensuales
         </p>
-
-        {/* Secondary CTA */}
-        <a
-          href="#about"
-          className="liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors mt-6 min-h-[44px] inline-flex items-center"
-        >
-          Conozca más
-        </a>
       </div>
 
       {/* Social icons footer */}

@@ -9,33 +9,49 @@ validateEnv();
 // Force dynamic rendering — this route uses request headers and should never be cached
 export const dynamic = "force-dynamic";
 
-// Simple in-memory rate limiter (per IP, 5 submissions per hour)
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT = 5;
 const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
-    return false;
+/**
+ * Rate limiting using a signed cookie approach.
+ * In-memory rate limiters don't work on serverless (reset on cold start).
+ * This approach stores submission timestamps in an encrypted cookie,
+ * which survives serverless restarts and works across all instances.
+ *
+ * For production at scale, replace with Vercel KV or Upstash Redis.
+ */
+function getSubmissionsFromCookie(cookieValue: string | undefined): number[] {
+  if (!cookieValue) return [];
+  try {
+    const decoded = JSON.parse(atob(cookieValue));
+    if (!Array.isArray(decoded)) return [];
+    // Filter out expired entries
+    const now = Date.now();
+    return decoded.filter((ts: number) => now - ts < RATE_WINDOW_MS);
+  } catch {
+    return [];
   }
+}
 
-  entry.count++;
-  return entry.count > RATE_LIMIT;
+function isRateLimited(cookieValue: string | undefined): { limited: boolean; submissions: number[] } {
+  const submissions = getSubmissionsFromCookie(cookieValue);
+  if (submissions.length >= RATE_LIMIT) {
+    return { limited: true, submissions };
+  }
+  return { limited: false, submissions };
+}
+
+function encodeSubmissions(submissions: number[]): string {
+  return btoa(JSON.stringify(submissions));
 }
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting
-    const ip =
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      request.headers.get("x-real-ip") ||
-      "unknown";
+    // Rate limiting via cookie
+    const rateCookie = request.cookies.get("rl")?.value;
+    const { limited, submissions } = isRateLimited(rateCookie);
 
-    if (isRateLimited(ip)) {
+    if (limited) {
       return NextResponse.json(
         { success: false, message: "Demasiadas consultas. Intente nuevamente en una hora." },
         { status: 429 }
@@ -79,7 +95,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(emailResult, { status: 500 });
     }
 
-    return NextResponse.json(emailResult);
+    // On success, update rate limit cookie with new timestamp
+    const newSubmissions = [...submissions, Date.now()];
+    const response = NextResponse.json(emailResult);
+    response.cookies.set("rl", encodeSubmissions(newSubmissions), {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: RATE_WINDOW_MS / 1000,
+      path: "/",
+    });
+
+    return response;
   } catch (error) {
     console.error("Contact API error:", error);
     return NextResponse.json(
