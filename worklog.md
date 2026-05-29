@@ -1,21 +1,21 @@
 ---
-Task ID: investigate
+Task ID: spec
 Agent: main
-Task: Run /investigate — Competitive & SEO Intelligence for Eduardo Bianco patrimonial conflict resolution site
+Task: Run /spec — Create Phase 1 backlog-ready spec for service pages + P0 fixes
 
 Work Log:
-- Executed 17+ web searches across Google Argentina for competitor keywords
-- Identified 5 direct competitors: Estudio VBA, Favier Dubois & Spagnolo, Estudio Marrocco, Rosario Abogados, SBA Abogados
-- Discovered 2 keyword clusters with ZERO organic competition: "derecho patrimonial abogado CABA" and "mediacion patrimonial abogado Buenos Aires"
-- Audited all 14 source files of current site for SEO, content, and conversion gaps
-- Found 15 critical/high/medium issues in current site
-- Identified 9 strategic opportunities no competitor is exploiting
-- Generated comprehensive PDF report with cover page, TOC, and 10 chapters
-- Report saved to /home/z/my-project/download/Investigacion_Competitiva_Eduardo_Bianco.pdf
+- Created comprehensive spec document covering 6 service pages + 4 P0 critical fixes
+- Defined acceptance criteria for each deliverable (14 criteria for service pages, 9 for P0 fixes)
+- Specified content requirements for each service page (title, meta, keywords, H1, content outline)
+- Documented technical architecture (dynamic routes [slug], services-data.ts, component breakdown)
+- Listed 12 files to create/modify
+- Defined out-of-scope items for future phases
+- Established implementation order (10 steps, ~3+ days estimated)
+- Generated DOCX with cover page and postcheck passed 9/9
 
 Stage Summary:
-- Key finding: Only Estudio VBA has a dedicated "conflictos patrimoniales" page — they rank #1 because of it
-- Key finding: Current site is single-page = cannot rank for service-specific keywords (FATAL SEO gap)
-- Key finding: 0/5 competitors offer online booking, live chat, or pricing transparency
-- Key finding: Fake star rating in Hero is a legal risk under Argentina's Ley de Defensa del Consumidor
-- Recommended next skill: /spec to create Phase 1 specification (service pages + P0 fixes)
+- Spec file: /home/z/my-project/download/spec-fase1-paginas-servicio-p0.docx (16 KB)
+- Priority: P0 (Critical)
+- Effort: XL (3+ days)
+- Key decisions: Dynamic routes via [slug], centralized services-data.ts, Cloudflare Turnstile managed mode
+- Next: User confirms spec → /build to execute
