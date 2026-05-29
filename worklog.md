@@ -130,3 +130,27 @@ Stage Summary:
 - 3 new files: data/faqs.ts, data/privacy-points.ts, hooks/useBodyScrollLock.ts
 - TypeScript compiles clean (tsc --noEmit passes)
 - Deployed via GitHub auto-deploy to Vercel
+
+---
+Task ID: ship
+Agent: main
+Task: /ship — Deploy to production with pre-ship verification
+
+Work Log:
+- Ran comprehensive pre-ship checklist (10 categories): Meta Tags, Favicon, CTAs, Console Errors, Mobile Responsive, Accessibility, SEO, Security, Error Handling, Performance — ALL 10/10 PASS
+- Fixed minor advisory: added .env to .gitignore to prevent future secret leaks (commit ff321ca)
+- Pushed to GitHub → auto-deploy to Vercel production
+- Verified all 8 routes return HTTP 200: /, /servicios/conflictos-por-herencia, /servicios/societarios, /servicios/propiedad, /servicios/mediacion-patrimonial, /servicios/peritaje-economico, /servicios/arbitraje-patrimonial, /servicios/planificacion-patrimonial
+- Verified sitemap.xml returns 7 URLs with correct domain
+- Verified robots.txt properly configured
+- Browser-tested desktop + mobile (375x812 viewport): zero console errors, all interactive elements functional
+- Took verification screenshots: ship-verification-home.png, ship-verification-service-page.png, ship-verification-mobile.png
+
+Stage Summary:
+- LIVE URL: https://my-project-khaki-three-45.vercel.app/
+- Commit: ff321ca (ship-ready)
+- Pre-ship checklist: 10/10 PASS (zero blockers)
+- All pages: HTTP 200
+- Console errors: 0 (desktop + mobile)
+- Screenshots saved to /home/z/my-project/download/
+- Project is SHIPPED and production-ready
