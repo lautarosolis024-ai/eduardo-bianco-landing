@@ -20,6 +20,7 @@ const PrivacyPolicySection = dynamic(() => import("@/components/sections/Privacy
 const Footer = dynamic(() => import("@/components/sections/Footer"));
 const WhatsAppButton = dynamic(() => import("@/components/sections/WhatsAppButton"));
 const ScrollToTop = dynamic(() => import("@/components/sections/ScrollToTop"));
+const CookieConsent = dynamic(() => import("@/components/sections/CookieConsent"));
 
 function SectionSkeleton() {
   return (
@@ -70,6 +71,7 @@ export default function Home() {
       <Footer />
       <WhatsAppButton />
       <ScrollToTop />
+      <CookieConsent />
     </div>
   );
 }

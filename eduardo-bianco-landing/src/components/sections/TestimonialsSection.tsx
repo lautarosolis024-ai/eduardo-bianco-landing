@@ -9,10 +9,10 @@ export default function TestimonialsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Build Review structured data for rich snippets
+  // Build Review-only structured data (root LegalService schema is in layout.tsx)
   const reviewsJsonLd = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "LegalService",
     name: "Eduardo Bianco — Resolución de Conflictos Patrimoniales",
     review: testimonials.map((t) => ({
       "@type": "Review",
@@ -62,7 +62,7 @@ export default function TestimonialsSection() {
                 <Star key={i} className="w-4 h-4 fill-[#D4875A] text-[#D4875A]" aria-hidden="true" />
               ))}
             </div>
-            <span className="text-white/70 text-sm">Casos verificados</span>
+            <span className="text-white/70 text-sm">Testimonios basados en casos reales</span>
           </div>
 
           <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">

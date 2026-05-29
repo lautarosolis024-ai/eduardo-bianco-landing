@@ -1,6 +1,5 @@
 import { Resend } from "resend";
-import { sanitizeInput, escapeHtml } from "./validations";
-import { conflictTypeLabels } from "./validations";
+import { sanitizeInput, escapeHtml, conflictTypeLabels, type ContactFormValues } from "./validations";
 
 // Lazy-init Resend to avoid build-time crash when API key is missing
 let _resend: Resend | null = null;
@@ -25,15 +24,7 @@ const EMAIL_FROM = process.env.EMAIL_FROM ||
     : "Eduardo Bianco <onboarding@resend.dev>");
 const EMAIL_TO = process.env.EMAIL_TO || "ejuliobianco@gmail.com";
 
-interface EmailPayload {
-  name: string;
-  phone: string;
-  email: string;
-  conflictType: string;
-  description: string;
-}
-
-export async function sendContactEmail(data: EmailPayload): Promise<{ success: boolean; message: string }> {
+export async function sendContactEmail(data: ContactFormValues): Promise<{ success: boolean; message: string }> {
   // In production, EMAIL_FROM must be explicitly set to a verified domain sender
   if (!EMAIL_FROM) {
     console.error("[EMAIL] EMAIL_FROM is not set. In production, set this to a verified Resend sender address.");

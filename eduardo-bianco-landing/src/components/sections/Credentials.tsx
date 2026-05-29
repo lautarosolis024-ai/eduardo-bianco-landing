@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { GraduationCap, Briefcase, Building2, Users } from "lucide-react";
+import { BUSINESS_STATS } from "@/lib/config";
 
 const credentials = [
   {
@@ -12,7 +13,7 @@ const credentials = [
   },
   {
     icon: Briefcase,
-    text: "30+ años como Consultor Internacional",
+    text: `${BUSINESS_STATS.consultingYears} años como Consultor Internacional`,
   },
   {
     icon: Building2,

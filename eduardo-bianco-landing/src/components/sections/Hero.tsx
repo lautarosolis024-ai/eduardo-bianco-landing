@@ -72,18 +72,27 @@ export default function Hero() {
     }, 100);
   }, [prefersReduced]);
 
+  const handleVideoError = useCallback(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    // Show poster fallback if video fails to load
+    v.style.display = "none";
+  }, []);
+
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     v.addEventListener("canplay", handleCanPlay);
     v.addEventListener("timeupdate", handleTimeUpdate);
     v.addEventListener("ended", handleEnded);
+    v.addEventListener("error", handleVideoError);
     return () => {
       v.removeEventListener("canplay", handleCanPlay);
       v.removeEventListener("timeupdate", handleTimeUpdate);
       v.removeEventListener("ended", handleEnded);
+      v.removeEventListener("error", handleVideoError);
     };
-  }, [handleCanPlay, handleTimeUpdate, handleEnded]);
+  }, [handleCanPlay, handleTimeUpdate, handleEnded, handleVideoError]);
 
   return (
     <section className="min-h-screen overflow-hidden relative flex flex-col">
@@ -130,10 +139,10 @@ export default function Hero() {
           Economista, Contador y Mediador — no solo abogado
         </p>
 
-        {/* Speed differentiator */}
-        <p className="text-white/90 text-lg md:text-xl font-semibold mb-6 font-instrument">
+        {/* Speed differentiator — linked to methodology for proof */}
+        <a href="#methodology" className="text-white/90 text-lg md:text-xl font-semibold mb-6 font-instrument hover:text-white transition-colors inline-block">
           Resultados en 30–120 días
-        </p>
+        </a>
 
         {/* Audience-segmented quick-select pills */}
         <div className="flex flex-col items-center mb-8">
@@ -180,10 +189,15 @@ export default function Hero() {
           el dinero se cruzan. Sin juicios. Sin desgaste.
         </p>
 
-        {/* Urgency badge */}
-        <p className="mt-3 text-white/60 text-xs">
-          Consulta gratuita · Cupos limitados mensuales
-        </p>
+        {/* Urgency badge + trust signal */}
+        <div className="mt-3 flex flex-col items-center gap-1">
+          <p className="text-white/60 text-xs">
+            Consulta gratuita · Cupos limitados mensuales
+          </p>
+          <p className="text-white/50 text-xs">
+            ★ ★ ★ ★ ★ 500+ conflictos resueltos
+          </p>
+        </div>
       </div>
 
       {/* Social icons footer */}

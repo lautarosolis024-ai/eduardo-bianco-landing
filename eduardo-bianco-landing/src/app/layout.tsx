@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { MotionConfig } from "framer-motion";
 import { PHONE_SCHEMA, CONTACT_EMAIL } from "@/lib/config";
 import "./globals.css";
 
@@ -44,7 +45,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Eduardo Julio Bianco" }],
   alternates: {
     canonical: "https://eduardobianco.com.ar",
+    languages: { "es-AR": "https://eduardobianco.com.ar" },
   },
+  robots: { index: true, follow: true },
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
@@ -71,7 +74,7 @@ export const metadata: Metadata = {
     title: "Eduardo Bianco | Resolución de Conflictos Patrimoniales",
     description:
       "Especialista en resolución de conflictos patrimoniales. Resultados en 30-120 días.",
-    images: ["/og-image.png"],
+    images: [{ url: "/og-image.png", alt: "Eduardo Bianco — Resolución de Conflictos Patrimoniales" }],
   },
 };
 
@@ -86,7 +89,19 @@ const jsonLd = {
   address: {
     "@type": "PostalAddress",
     addressLocality: "Buenos Aires",
+    addressRegion: "CABA",
     addressCountry: "AR",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -34.6037,
+    longitude: -58.3816,
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
   },
   priceRange: "Consulta inicial sin cargo",
   areaServed: {
@@ -114,7 +129,9 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <MotionConfig reducedMotion="user">
+          {children}
+        </MotionConfig>
         <Analytics />
         <SpeedInsights />
       </body>

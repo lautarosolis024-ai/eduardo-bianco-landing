@@ -226,13 +226,19 @@ export default function ContactForm() {
                 onChange={(e) => handleChange("description", e.target.value)}
                 placeholder="Cuéntenos brevemente sobre su conflicto patrimonial..."
                 rows={4}
+                maxLength={2000}
                 className={`${inputClasses} resize-none`}
                 required
                 aria-required="true"
               />
-              {fieldErrors.description && (
-                <p className={errorClasses}>{fieldErrors.description}</p>
-              )}
+              <div className="flex items-center justify-between mt-1">
+                {fieldErrors.description ? (
+                  <p className={errorClasses}>{fieldErrors.description}</p>
+                ) : (
+                  <span />
+                )}
+                <span className="text-white/40 text-xs">{formData.description.length}/2000</span>
+              </div>
             </div>
 
             <button

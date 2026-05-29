@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { Globe, Menu, X } from "lucide-react";
 import { getWhatsAppUrl } from "@/lib/config";
 
@@ -15,15 +17,64 @@ const navLinks = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) setMenuOpen(false);
+      if (window.innerWidth >= 1024) setMenuOpen(false);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeMenu();
+        menuButtonRef.current?.focus();
+      }
+    };
+    if (menuOpen) document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [menuOpen, closeMenu]);
+
+  // Focus trap for mobile menu
+  useEffect(() => {
+    if (!menuOpen || !menuRef.current) return;
+
+    const menu = menuRef.current;
+    const focusableElements = menu.querySelectorAll<HTMLElement>(
+      'a[href], button, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstEl = focusableElements[0];
+    const lastEl = focusableElements[focusableElements.length - 1];
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      if (e.shiftKey) {
+        if (document.activeElement === firstEl) {
+          e.preventDefault();
+          lastEl?.focus();
+        }
+      } else {
+        if (document.activeElement === lastEl) {
+          e.preventDefault();
+          firstEl?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleTab);
+    // Focus the first menu item when opened
+    firstEl?.focus();
+
+    return () => document.removeEventListener("keydown", handleTab);
+  }, [menuOpen]);
 
   // Active section tracking via IntersectionObserver
   useEffect(() => {
@@ -50,12 +101,12 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-30 px-4 sm:px-6 py-3 sm:py-4">
       <div className="liquid-glass rounded-full max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           <span className="text-white font-semibold text-base sm:text-lg">
             Eduardo Bianco
           </span>
-        </a>
+        </Link>
 
         <div className="hidden lg:flex items-center gap-6 xl:gap-8">
           {navLinks.map((link) => (
@@ -89,43 +140,58 @@ export default function Navbar() {
             Contacto
           </a>
           <button
+            ref={menuButtonRef}
             className="lg:hidden liquid-glass rounded-full p-2 text-white hover:bg-white/5 transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menú"
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {menuOpen && (
-        <div className="lg:hidden liquid-glass rounded-2xl max-w-5xl mx-auto mt-2 p-4 flex flex-col gap-3">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className={`text-base font-medium transition-colors py-2 px-2 ${
-                activeSection === link.href.slice(1)
-                  ? "text-white"
-                  : "text-white/80 hover:text-white"
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href={getWhatsAppUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setMenuOpen(false)}
-            className="text-white/80 hover:text-white text-base font-medium transition-colors py-2 px-2"
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            id="mobile-menu"
+            ref={menuRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú de navegación"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="lg:hidden liquid-glass rounded-2xl max-w-5xl mx-auto mt-2 p-4 flex flex-col gap-3"
           >
-            WhatsApp
-          </a>
-        </div>
-      )}
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                className={`text-base font-medium transition-colors py-2 px-2 ${
+                  activeSection === link.href.slice(1)
+                    ? "text-white"
+                    : "text-white/80 hover:text-white"
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href={getWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}
+              className="text-white/80 hover:text-white text-base font-medium transition-colors py-2 px-2"
+            >
+              WhatsApp
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

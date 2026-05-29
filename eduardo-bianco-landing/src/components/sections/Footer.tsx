@@ -98,12 +98,17 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/60 text-xs text-center md:text-left">
-            &copy; {currentYear} Eduardo Bianco &middot; Economista &middot; Contador Público &middot; Mediador
-          </p>
-          <p className="text-white/60 text-xs text-center md:text-right">
-            Protección de datos personales conforme a la Ley 25.326
+        <div className="pt-8 border-t border-white/5 flex flex-col gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-white/60 text-xs text-center md:text-left">
+              &copy; {currentYear} Eduardo Bianco &middot; Economista &middot; Contador Público &middot; Mediador
+            </p>
+            <p className="text-white/60 text-xs text-center md:text-right">
+              Protección de datos personales conforme a la Ley 25.326
+            </p>
+          </div>
+          <p className="text-white/40 text-[11px] text-center leading-relaxed max-w-3xl mx-auto">
+            Este sitio no constituye asesoramiento legal. Los servicios de mediación no equivalen a patrocinio jurídico. Cada caso es particular y los resultados pueden variar.
           </p>
         </div>
       </div>

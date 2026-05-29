@@ -34,7 +34,8 @@ export const OFFICE_LOCATION = "Buenos Aires, Argentina";
 
 // Business stats
 export const BUSINESS_STATS = {
-  yearsExperience: "20+",
+  yearsExperience: "20+",        // 20+ years specifically in conflict resolution
+  consultingYears: "30+",        // 30+ years as international consultant (broader career)
   casesResolved: "500+",
   daysToResults: "30-120",
   satisfactionRate: "98%",
