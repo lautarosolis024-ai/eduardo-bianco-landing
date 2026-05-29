@@ -1,1 +1,18 @@
 .vercel
+node_modules/
+.next/
+*.log
+.env
+.env.local
+
+# Skills and example dirs (not needed for deployment)
+eduardo-bianco-landing/skills/
+eduardo-bianco-landing/_examples_off/
+eduardo-bianco-landing/download/
+eduardo-bianco-landing/db/
+eduardo-bianco-landing/upload/
+eduardo-bianco-landing/tsconfig.tsbuildinfo
+
+# Top-level non-project dirs
+download/
+skills/

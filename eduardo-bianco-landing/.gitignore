@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.env.local
+.dev.log
+.zscripts/
+*.log
+.vercel
+
+# Secrets
+.secrets/
