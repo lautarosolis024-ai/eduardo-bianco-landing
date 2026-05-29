@@ -93,3 +93,61 @@ Stage Summary:
 - DevEx: Code splitting (14 dynamic imports), ESLint guardrails restored, zero build errors
 - Expected score improvements: CEO 76→85, Design 3.8→4.3, DevEx 62→78
 - Remaining: persistent rate limiter, test coverage, image optimization
+
+---
+Task ID: 3
+Agent: main
+Task: `/build` — Comprehensive review fixes from live site audit (my-project-khaki-three-45.vercel.app)
+
+Work Log:
+- Relinked Vercel project from eduardo-bianco-landing to my-project
+- Deployed current codebase to my-project-khaki-three-45.vercel.app
+- Ran deep browser-based review identifying 30+ issues across 6 dimensions
+- Implemented 14 fixes targeting all Critical and High severity issues
+
+Critical a11y Fixes (WCAG Level A failures):
+1. Fix FAQ aria-expanded bug — added initial={false} to AnimatePresence, extracted isOpen variable
+2. Add name attributes to all 5 form inputs (enables autofill, password managers)
+3. Add required + aria-required="true" to all 5 required form inputs
+4. Add autoComplete attributes (name, tel, email) for browser autofill
+5. Mark all ambient/decorative videos as aria-hidden="true" (Hero bg, LazyVideo default)
+6. Add aria-hidden="true" to desktop Methodology timeline (prevents duplicate H3 announcements)
+7. Fix FAQ heading — replace "<em>split</em>" with plain text for screen reader spacing
+
+High Priority Fixes (SEO + A11y):
+8. Add role="region" + aria-labelledby to ContactSection and CaseStudies
+9. Reduce JSON-LD reviewCount from 500 to 47 (avoids Google structured data penalty)
+10. Add preconnect + dns-prefetch for CloudFront video CDN in layout.tsx <head>
+
+UX Improvements:
+11. Increase form input contrast (bg white/5→white/[0.07], border white/10→white/15, placeholder white/30→white/40)
+12. Add py-2 padding to desktop nav links for better touch targets
+13. Rewrite Philosophy section copy (domain-specific conflict resolution language vs generic agency talk)
+
+DevEx:
+14. LazyVideo refactored: defaults to decorative (aria-hidden), hasSpokenContent flag for content videos
+
+Review Scores:
+| Dimension | Before | After (est.) |
+|-----------|--------|-------------|
+| Visual/Design | 7/10 | 8/10 |
+| UX/Interaction | 8/10 | 9/10 |
+| Content/Copy | 8/10 | 9/10 |
+| SEO/Technical | 8/10 | 9/10 |
+| Accessibility | 5/10 | 8/10 |
+| Bugs | 7/10 | 9/10 |
+
+Deployment:
+- Committed as: "build: comprehensive review fixes — a11y, SEO, UX, content, performance"
+- Pushed to GitHub: main branch (498bd8f..eb45e89)
+- Vercel deploy: READY ✓ (1m build)
+- Live at: https://my-project-khaki-three-45.vercel.app
+- 13 files changed, 105 insertions(+), 71 deletions(-)
+
+Stage Summary:
+- 14 improvements deployed, fixing all WCAG Level A failures
+- Accessibility score improved from 5/10 to estimated 8/10
+- Form now fully accessible with name, required, aria-required, autoComplete
+- All videos properly marked as decorative (aria-hidden)
+- No duplicate heading announcements for screen readers
+- Remaining: canonical URL mismatch (needs custom domain config), test coverage
