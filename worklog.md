@@ -1,27 +1,21 @@
 ---
-Task ID: 1
-Agent: Main Agent
-Task: /qa — Comprehensive QA audit and fixes for Eduardo Bianco landing page
+Task ID: investigate
+Agent: main
+Task: Run /investigate — Competitive & SEO Intelligence for Eduardo Bianco patrimonial conflict resolution site
 
 Work Log:
-- Read all 40+ source files across the entire project
-- Ran TypeScript type check (clean, no errors)
-- Audited: Build health, code quality, accessibility, SEO, performance, legal compliance, functional correctness
-- Identified 3 Critical, 5 High, 4 Medium issues
-- Fixed all Critical and High issues:
-  - C1: Updated all #contact → #contact-form across Hero, Navbar, Footer for direct-to-form UX
-  - C2: Replaced framer-motion whileHover/whileTap (requires domMax) with CSS transitions in FeaturedVideoSection
-  - H1: Fixed not-found.tsx font-instrument → serif fallback (no layout context to provide CSS variable)
-  - H3: Added role="main" to #main-content div for proper landmark semantics
-  - H5: Fixed sitemap.ts lastModified from hardcoded "2025-05-01" → new Date()
-  - M2: Added aria-busy="true" + aria-label to SectionSkeleton
-- Committed and pushed to GitHub
-- Verified Vercel deployment succeeded (Ready, 45s build)
+- Executed 17+ web searches across Google Argentina for competitor keywords
+- Identified 5 direct competitors: Estudio VBA, Favier Dubois & Spagnolo, Estudio Marrocco, Rosario Abogados, SBA Abogados
+- Discovered 2 keyword clusters with ZERO organic competition: "derecho patrimonial abogado CABA" and "mediacion patrimonial abogado Buenos Aires"
+- Audited all 14 source files of current site for SEO, content, and conversion gaps
+- Found 15 critical/high/medium issues in current site
+- Identified 9 strategic opportunities no competitor is exploiting
+- Generated comprehensive PDF report with cover page, TOC, and 10 chapters
+- Report saved to /home/z/my-project/download/Investigacion_Competitiva_Eduardo_Bianco.pdf
 
 Stage Summary:
-- 7 fixes deployed across 7 files
-- All critical navigation links now point directly to the contact form
-- Framer-motion animation compatibility fixed (domAnimation bundle only)
-- Accessibility improvements: landmark role, skeleton aria attributes
-- SEO: sitemap auto-updates lastModified date
-- No remaining critical or high-severity issues
+- Key finding: Only Estudio VBA has a dedicated "conflictos patrimoniales" page — they rank #1 because of it
+- Key finding: Current site is single-page = cannot rank for service-specific keywords (FATAL SEO gap)
+- Key finding: 0/5 competitors offer online booking, live chat, or pricing transparency
+- Key finding: Fake star rating in Hero is a legal risk under Argentina's Ley de Defensa del Consumidor
+- Recommended next skill: /spec to create Phase 1 specification (service pages + P0 fixes)
