@@ -3,9 +3,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { m, AnimatePresence } from "framer-motion";
 import { X, BookOpen, ArrowRight } from "lucide-react";
+import { getWhatsAppUrl } from "@/lib/config";
 
 const EXIT_INTENT_KEY = "eb-exit-intent-dismissed";
-const LEAD_MAGNET_URL = "https://wa.me/5491145779160?text=Hola%20Eduardo%2C%20me%20interesa%20la%20gu%C3%ADa%20gratuita%20sobre%205%20errores%20en%20conflictos%20patrimoniales";
 
 export default function ExitIntentPopup() {
   const [visible, setVisible] = useState(false);
@@ -91,7 +91,7 @@ export default function ExitIntentPopup() {
 
               {/* CTA */}
               <a
-                href={LEAD_MAGNET_URL}
+                href={getWhatsAppUrl("Hola Eduardo, me interesa la guía gratuita sobre 5 errores en conflictos patrimoniales")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full bg-white hover:bg-white/90 text-black rounded-xl py-3.5 text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"

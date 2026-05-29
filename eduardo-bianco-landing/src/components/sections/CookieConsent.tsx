@@ -22,11 +22,14 @@ export default function CookieConsent() {
   const accept = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ accepted: true, date: new Date().toISOString() }));
     setVisible(false);
+    // Notify AnalyticsConsent component (same-tab storage events don't fire StorageEvent)
+    window.dispatchEvent(new CustomEvent("cookie-consent-change"));
   };
 
   const decline = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({ accepted: false, date: new Date().toISOString() }));
     setVisible(false);
+    window.dispatchEvent(new CustomEvent("cookie-consent-change"));
   };
 
   return (

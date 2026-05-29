@@ -161,7 +161,7 @@ export default function ContactCombined() {
         </div>
 
         {/* Form */}
-        <div className="max-w-2xl">
+        <div id="contact-form" className="max-w-2xl">
           {formState === "success" ? (
             <m.div
               initial={{ opacity: 0, scale: 0.95 }}

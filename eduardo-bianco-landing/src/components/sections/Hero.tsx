@@ -113,7 +113,7 @@ export default function Hero() {
         muted
         autoPlay
         playsInline
-        preload="none"
+        preload="auto"
         poster="/og-image.png"
         aria-hidden="true"
       />

@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { MotionConfig, LazyMotion, domAnimation } from "framer-motion";
 import { PHONE_SCHEMA, CONTACT_EMAIL } from "@/lib/config";
+import AnalyticsConsent from "@/components/sections/AnalyticsConsent";
 import "./globals.css";
 
 const inter = Inter({
@@ -136,7 +135,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" />
         <link rel="dns-prefetch" href="https://d8j0ntlcm91z4.cloudfront.net" />
-        <link rel="preload" as="fetch" href="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4" crossOrigin="anonymous" />
+        <link rel="preload" as="video" href="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4" />
       </head>
       <body className={`${inter.variable} ${instrumentSerif.variable} font-sans antialiased bg-black text-white`}>
         <script
@@ -152,8 +151,7 @@ export default function RootLayout({
             {children}
           </MotionConfig>
         </LazyMotion>
-        <Analytics />
-        <SpeedInsights />
+        <AnalyticsConsent />
       </body>
     </html>
   );
