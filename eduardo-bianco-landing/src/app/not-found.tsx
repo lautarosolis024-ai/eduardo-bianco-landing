@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center px-6">
       <div className="max-w-md w-full text-center">
-        <h1 className="text-8xl font-instrument text-white mb-4">404</h1>
+        <h1 className="text-8xl text-white mb-4" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>404</h1>
         <h2 className="text-xl font-semibold text-white mb-3">
           Página no encontrada
         </h2>

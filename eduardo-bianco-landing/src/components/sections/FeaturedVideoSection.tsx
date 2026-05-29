@@ -49,15 +49,13 @@ export default function FeaturedVideoSection() {
                 </p>
               </div>
 
-              <m.a
+              <a
                 href="#services"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-colors flex items-center gap-2 self-start md:self-auto"
+                className="liquid-glass rounded-full px-8 py-3 text-white text-sm font-medium hover:bg-white/5 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 self-start md:self-auto"
               >
                 Conocer más
                 <ArrowUpRight className="w-4 h-4" />
-              </m.a>
+              </a>
             </div>
           </div>
         </m.div>

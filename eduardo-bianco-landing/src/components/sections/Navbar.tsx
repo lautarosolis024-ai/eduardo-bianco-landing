@@ -11,7 +11,7 @@ const navLinks = [
   { href: "#services", label: "Servicios" },
   { href: "#philosophy", label: "Filosofía" },
   { href: "#methodology", label: "Método" },
-  { href: "#contact", label: "Contacto" },
+  { href: "#contact-form", label: "Contacto" },
 ];
 
 export default function Navbar() {
@@ -134,7 +134,7 @@ export default function Navbar() {
             Consulta sin cargo
           </a>
           <a
-            href="#contact"
+            href="#contact-form"
             className="liquid-glass rounded-full px-4 sm:px-6 py-2 text-white text-sm font-medium hover:bg-white/5 transition-colors"
           >
             Contacto

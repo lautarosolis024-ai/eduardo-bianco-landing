@@ -121,7 +121,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(212,135,90,0.05)]" />
 
       {/* Hero content */}
-      <div id="main-content" className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-10 text-center -translate-y-[5%] md:-translate-y-[10%]">
+      <div id="main-content" role="main" className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-10 text-center -translate-y-[5%] md:-translate-y-[10%]">
         {/* Differentiator headline: credentials as hero statement */}
         <div className="flex items-center gap-2 mb-6">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-white/70 text-xs font-medium tracking-wide">
@@ -209,7 +209,7 @@ export default function Hero() {
         <a href={`tel:${PHONE_TEL}`} className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Teléfono">
           <Phone className="w-5 h-5" />
         </a>
-        <a href="#contact" className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Contacto">
+        <a href="#contact-form" className="liquid-glass rounded-full p-4 text-white/80 hover:text-white hover:bg-white/5 transition-all min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Contacto">
           <Globe className="w-5 h-5" />
         </a>
       </div>

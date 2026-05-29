@@ -12,7 +12,7 @@ export default function Footer() {
     { href: "#philosophy", label: "Filosofía" },
     { href: "#methodology", label: "Método" },
     { href: "#cases", label: "Casos" },
-    { href: "#contact", label: "Contacto" },
+    { href: "#contact-form", label: "Contacto" },
     { href: "#faq", label: "FAQ" },
   ];
 
