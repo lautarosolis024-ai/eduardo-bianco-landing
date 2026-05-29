@@ -148,10 +148,11 @@ export default function Hero() {
                 href={getWhatsAppUrl(`Hola Eduardo, tengo un conflicto de ${ct.label.toLowerCase()} y necesito una consulta.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="liquid-glass rounded-full px-5 py-2.5 text-white/80 hover:text-white hover:bg-white/5 text-xs sm:text-sm font-medium transition-colors min-h-[44px]"
+                className="liquid-glass rounded-full px-5 py-2 text-white/80 hover:text-white hover:bg-white/5 text-xs sm:text-sm font-medium transition-colors inline-flex items-center gap-1.5"
                 aria-label={ct.ariaLabel}
               >
-                <span className="mr-1" aria-hidden="true">{ct.emoji}</span> {ct.label}
+                <span aria-hidden="true">{ct.emoji}</span>
+                <span>{ct.label}</span>
               </a>
             ))}
           </div>
